@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'CIDBA',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'CIDBA',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => 'CIDBA',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,83 +108,139 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        '',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text'    => 'Universidad',
+            'icon'    => 'file',
             'submenu' => [
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Universidades',
+                    'url'  => '/universidades',
                 ],
                 [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text' => 'Facultades',
+                    'url'  => '/facultades',
                 ],
                 [
-                    'text' => 'Level One',
-                    'url'  => '#',
+                    'text' => 'Programas académicos',
+                    'url'  => '/programasacademicos',
                 ],
             ],
         ],
-        'LABELS',
+        '',
         [
-            'text'       => 'Important',
-            'icon_color' => 'red',
+            'text'    => 'Programa',
+            'icon'    => 'file',
+            'submenu' => [
+                [
+                    'text' => 'Semestres',
+                    'url'  => '/semestres',
+                ],
+                [
+                    'text' => 'Estados',
+                    'url'  => '/estados',
+                ],
+                [
+                    'text' => 'Planes académicos',
+                    'url'  => '/planesacademicos',
+                ],
+            ],
         ],
+        '',
         [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
+            'text'    => 'Materias',
+            'icon'    => 'file',
+            'submenu' => [
+                [
+                    'text' => 'Naturalezas',
+                    'url'  => '/naturaleza',
+                ],
+                [
+                    'text' => 'Metodologías',
+                    'url'  => '/tiposmetodologias',
+                ],
+                [
+                    'text' => 'Evaluación',
+                    'url'  => '/tiposevaluaciones',
+                ],
+                [
+                    'text' => 'Áreas de conocimiento',
+                    'url' => '/areasconocimiento'
+                ],
+                [
+                    'text' => 'Actividades académicas',
+                    'url' => '/actividadesacademicas'
+                ],
+                [
+                    'text' => 'Espacios académicos',
+                    'url' => '/espaciosacademicos'
+                ]
+            ],
         ],
+        '',
         [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
+          'text'    => 'Habilidades',
+          'icon'    => 'file',
+          'submenu' => [
+              [
+                  'text' => 'Tipos habilidad',
+                  'url'  => '/tiposhabilidad',
+              ],
+              [
+                  'text' => 'Habilidades',
+                  'url'  => '/habilidades',
+              ],
+              [
+                  'text' => 'Objetivos',
+                  'url'  => '/objetivos',
+              ],
+              [
+                  'text' => 'Asignar pesos',
+                  'url'  => '/asignacion',
+              ]
+            ],
         ],
+        '',
+        [
+          'text'    => 'Estadísticas',
+          'icon'    => 'file',
+          'submenu' => [
+              [
+                  'text' => 'Gráfica área de conocimiento',
+                  'url'  => '/estadisticaAreaConocimiento',
+              ],
+              [
+                  'text' => 'Gráfica por plan de estudios',
+                  'url'  => '/estadistica',
+              ],
+            ],
+        ],
+        '',
+        [
+          'text'    => ' usuarios',
+          'icon'    => 'user',
+          'submenu' => [
+              [
+                  'text' => ' usuarios',
+                  'url'  => '/register',
+              ],
+              [
+                  'text' => ' roles',
+                  'url'  => '/roles',
+              ],
+              [
+                  'text' => ' permisos',
+                  'url'  => '/autoriza',
+              ]
+            ],
+        ],
+        '',
+        [
+          'text' => 'Subir archivos',
+          'icon' => 'file-text',
+          'url' => '/formulario'
+        ]
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
