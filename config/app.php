@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Admin lte
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -229,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,  
+        'Html' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
