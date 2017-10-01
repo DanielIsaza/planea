@@ -116,6 +116,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+      'faculty_id' => 'Facultad',
+      'academicprogram_id' => 'Programa académico',
+      'university_id' => 'Universidad',
+      'state_id' => 'Estado',
+      'academicplan_id' => 'Plan académico',
+      'semester_id' => 'Semestre',
+      'activityacademic_id' => 'Actividad académica',
+      'typeevaluation_id' => 'Tipo de evaluación',
+      'typemethodology_id' => 'Tipo de metodología',
+      'nature_id' => 'Naturaleza',
+      'profile_id' => 'Perfil',
+      'typeability_id' => 'Tipo de habilidad',
+      'ability_id' => 'Habilidad',
+      'academicspace_id' => 'Espacio académico',
+      "objective_id" => "Objetivos",
+      'knowledgearea_id'=>'Áreas de conocimiento',
+      'user_id'=>'Usuario',
+      'rol_id'=>'Rol',
+    ],
 
 ];
