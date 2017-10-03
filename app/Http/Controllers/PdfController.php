@@ -26,20 +26,11 @@ class PdfController extends Controller
 
   public function descarga1($id){
 
-    $tmpfname = tempnam('/var/folders/rb/5hkb03z17mv55gtk61wkzmv00000gn/T', 'PhpWord');
-
-    $handle = fopen($tmpfname, "w");
-    fwrite($handle, "writing to tempfile");
-    fclose($handle);
-
-    dd($tmpfname);
-
-      $templateword = new TemplateProcessor("syllabus.docx");
-      $nombre = "Este es un nombre";
-      $templateword->setValue('nombre',$nombre);
-      $templateword->saveAs("prueba.docx");
-
-      return response()->download("prueba.docx")->deleteFileAfterSend(true);
+          $templateword = new TemplateProcessor("syllabus.docx");
+        $nombre = "Este es un nombre, por favor funciona";
+         $templateword->setValue('nombre_espacio',$nombre);
+         $templateword->saveAs("prueba.docx");
+          return response()->download("prueba.docx")->deleteFileAfterSend(true);
   }
 
   public function prueba(){
