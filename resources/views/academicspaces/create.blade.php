@@ -174,11 +174,36 @@
 @endsection
 @section("tabla")
 	<script type="text/javascript">
+		//variable que define el id del select que contiene los requisitos para la materia
+		var id = 1;
+		//variable que define el id del select que contiene los corequisitos para la materia
+		var idc = 1;
+
+		function llenarRequisitos ($tipo)
+		{
+			var plan = $('#academicplan_id').val();
+			$.getJSON('{{ route('espaciosporplan' )}}/'+plan,null,function(values){
+					var options = '';
+					options += '<option value = "'+-1+'"> Seleccione una opción </option>';
+					$.each(values, function (key, row) {
+							options += '<option value="' + row.value + '">' + row.text + '</option>';
+					});
+					if($tipo == 1 ){
+						$("#selectr"+id).html(options);
+						id++;
+					}
+					else{
+						$("#selectc"+idc).html(options);
+						idc++;
+					}
+			});
+		}
+
 		$('#requisito').click(function (){
 			var plan = $('#academicplan_id').val();
 			if(plan > -1 && plan != null){
-				$('#drequisitos').append('<div class="controls"><select class="form-control" id="a" name="university_id"><option value="" selected="selected"></option><option value="1">Universidad del Quindío</option></select> </div>');
-
+				$('#drequisitos').append('<div class="controls"><select class="form-control" id="selectr'+id+'" name="Espacio académico"><option value="" selected="selected"></option></select> </div>');
+				llenarRequisitos(1);
 			}else {
 				alert('Primero seleccione un plan académico');
 			}
@@ -187,7 +212,10 @@
 		$('#corequisito').click(function (){
 			var plan = $('#academicplan_id').val();
 			if(plan > -1 && plan != null){
-				$('#dcorequisito').append('<div class="controls"><select class="form-control" id="university_id" name="university_id"><option value="" selected="selected"></option><option value="1">Universidad del Quindío</option></select>         </div>');
+				$('#dcorequisito').append('<div class="controls"><select class="form-control" id="selectc'+idc+'" name="Espacio académico"><option value="" selected="selected"></option></select> </div>');
+				llenarRequisitos(2);
+			}else {
+				alert('Primero seleccione un plan académico');
 			}
 		});
 	</script>

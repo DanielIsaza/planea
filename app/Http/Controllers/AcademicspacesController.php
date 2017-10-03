@@ -16,7 +16,7 @@ use App\Nature;
 use App\Semester;
 use App\Knowledgearea;
 
-class AcademicspaceController extends Controller
+class AcademicspacesController extends Controller
 {
   /**
    * Display a listing of the resource.

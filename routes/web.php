@@ -157,6 +157,13 @@ Route::get('estadisticaa/{plan_id?}/{area_id?}/{tipo?}',["as"=>"estadisticaa",fu
 	->groupBy('abilities.id','abilities.nombre')
 	->get();
 }]);
+// ruta que retorna los espacios academicos de un plan
+Route::get('espaciosacade/{plan_id?}',["as"=>"espaciosporplan",function($plan_id){
+  return DB::table('academicspaces')
+  ->where('academicplan_id','=',$plan_id)
+  ->select('academicspaces.id as value','academicspaces.nombre as text')
+  ->get();
+}]);
 
 //Ruta que da acceso al home de la aplicacion
 Route::get('/home', 'HomeController@index');
