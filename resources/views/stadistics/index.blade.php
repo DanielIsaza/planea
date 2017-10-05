@@ -55,8 +55,8 @@
     $('#academicplan_id').change(function(){
         var plan = $(this).val();
         if( plan > 0){
-            $.getJSON('{{ route('estadisticah') }}/'+plan+'/0',null,function(valuesT){
-                $.getJSON('{{ route('estadisticah') }}/'+plan+'/1',null,function(values){
+            $.getJSON('{{ route('estadisticaporplan') }}/'+plan,null,function(valuesT){
+                $.getJSON('{{ route('estadisticaporplan') }}/'+plan,null,function(values){
                     $('#grafica').graficar(values,valuesT);
                 });
             });

@@ -63,11 +63,11 @@ Route::resource('asignacionTeorica','ObjectivesspacesTController');
 //Rutas para el CRUD de las áreas de conocimiento
 Route::resource('areasconocimiento','KnowledgeareasController');
 // permite obtener las gráficas estadisticas
-Route::get('estadistica','StatisticsController@index');
+Route::get('estadistica','StadisticsController@index');
 // permite obtener las gráficas estadisticas
-Route::get('estadisticaAreaConocimiento','StatisticsController@indexA');
+Route::get('estadisticaAreaConocimiento','StadisticsController@indexA');
 // permite obtener tabla resumen con los datos
-Route::get('tablaResumen','StatisticsController@indexT');
+Route::get('tablaResumen','StadisticsController@indexT');
 // permite realizar la descarga del syllabus de un espacio académico
 Route::get('descarga/{espacio_id?}','PdfController@descarga1');
 //
@@ -116,44 +116,33 @@ Route::get('objetivo/{ability_id?}',["as"=>"objetivo/",function($ability_id){
 //Ruta que obtiene los espacios académicos y objetivos que son afectados por cada uno
 Route::get('objetivosreal/{ability_id?}',["as"=>"objetivosreal",function($ability_id){
 	return DB::table('abilities')
-	->join('weights','abilities.id','=','weights.ability_id')
-	->join('objectiveespaces','objectiveespaces.id','=','weights.objectiveEspace_id')
-	->join('objectives','objectives.id','=','objectiveespaces.objective_id')
+	->join('objectives','objectives.ability_id','=','abilities.id')
+	->join('objectiveespaces','objectiveespaces.objective_id','=','objectives.id')
 	->join('academicspaces','academicspaces.id','=','objectiveespaces.academicspace_id')
-	->where([['abilities.id','=',$ability_id],['weights.tipo','=','1']])->select('objectiveespaces.id as value','academicspaces.nombre as text','weights.peso','objectives.nombre as objetivos','objectives.peso as pesohabilidad')->get();
+	->where('abilities.id','=',$ability_id)->select('objectiveespaces.id as value','academicspaces.nombre as text','objectiveespaces.peso','objectives.nombre as objetivos','objectives.peso as pesohabilidad')->get();
 }]);
-//Ruta que obtiene los espacios académicos y objetivos que son afectados por cada uno
-Route::get('objetivosteo/{ability_id?}',["as"=>"objetivosteo",function($ability_id){
-	return DB::table('abilities')
-	->join('weights','abilities.id','=','weights.ability_id')
-	->join('objectiveespaces','objectiveespaces.id','=','weights.objectiveEspace_id')
-	->join('objectives','objectives.id','=','objectiveespaces.objective_id')
-	->join('academicspaces','academicspaces.id','=','objectiveespaces.academicspace_id')
-	->where('abilities.id','=',$ability_id)->select('objectiveespaces.id as value','academicspaces.nombre as text','weights.peso','objectives.nombre as objetivos','objectives.peso as pesohabilidad')->get();
-}]);
+
 // Ruta que retorna la información estadistica de las habilidades
-Route::get('estadisticah/{plan_id?}/{tipo?}',["as"=>"estadisticah",function($plan_id,$tipo){
+Route::get('estadisticaporplan/{plan_id?}',["as"=>"estadisticaporplan",function($plan_id){
 	return DB::table('academicplans')
 	->join('abilities','academicplans.id','=','abilities.academicplan_id')
 	->join('objectives','abilities.id','=','objectives.ability_id')
 	->join('objectiveespaces','objectives.id','=','objectiveespaces.objective_id')
-	->join('weights','objectiveespaces.id','=','weights.objectiveEspace_id')
-	->where([['weights.tipo','=',$tipo],['academicplans.id','=',$plan_id]])
-	->select('abilities.id as id','abilities.nombre as nombre',DB::raw('SUM(weights.peso) as peso'))
+	->where('academicplans.id','=',$plan_id)
+	->select('abilities.id as id','abilities.nombre as nombre',DB::raw('SUM(objectiveespaces.peso) as peso'))
 	->groupBy('abilities.id','abilities.nombre')
 	->get();
 }]);
 // Ruta que retorna la información estadistica de las habilidades
-Route::get('estadisticaa/{plan_id?}/{area_id?}/{tipo?}',["as"=>"estadisticaa",function($plan_id,$area_id,$tipo){
+Route::get('estadisticaporarea/{plan_id?}/{area_id?}',["as"=>"estadisticaporarea",function($plan_id,$area_id){
 	return DB::table('academicplans')
 	->join('abilities','academicplans.id','=','abilities.academicplan_id')
 	->join('objectives','abilities.id','=','objectives.ability_id')
 	->join('objectiveespaces','objectives.id','=','objectiveespaces.objective_id')
 	->join('academicspaces','objectiveespaces.academicspace_id','=','academicspaces.id')
 	->join('knowledgeareas','knowledgeareas.id','=','academicspaces.knowledgearea_id')
-	->join('weights','objectiveespaces.id','=','weights.objectiveEspace_id')
-	->where([['weights.tipo','=',$tipo],['academicplans.id','=',$plan_id],['knowledgeareas.id','=',$area_id]])
-	->select('abilities.id as id','abilities.nombre as nombre',DB::raw('SUM(weights.peso) as peso'))
+	->where([['academicplans.id','=',$plan_id],['knowledgeareas.id','=',$area_id]])
+	->select('abilities.id as id','abilities.nombre as nombre',DB::raw('SUM(objectiveespaces.peso) as peso'))
 	->groupBy('abilities.id','abilities.nombre')
 	->get();
 }]);

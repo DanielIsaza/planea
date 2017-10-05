@@ -49,21 +49,13 @@ class ObjectivespacesController extends Controller
   public function store(Request $request)
   {
       $espaciobjetivo = new Objectiveespace;
-      $peso = new Weight;
-
       $espaciobjetivo->academicspace_id = $request->academicspace_id;
       $espaciobjetivo->objective_id = $request->objective_id;
+      $espaciobjetivo->peso = $request->peso;
 
-      if($espaciobjetivo->save()){
-          //Valor para asignación real
-          $peso->tipo = 1;
-          $peso->peso = $request->peso;
-          $peso->ability_id = $request->ability_id;
-          $peso->Objectiveespace_id = \DB::table('Objectiveespaces')->max('id');
-          if($peso->save()){
-              \Alert::message('Asignación creada correctamente', 'success');
-              return redirect("/asignacion");
-          }
+      if($espaciobjetivo->save()){ 
+        \Alert::message('Asignación creada correctamente', 'success');
+        return redirect("/asignacion");
       }else{
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("objectivess.create");

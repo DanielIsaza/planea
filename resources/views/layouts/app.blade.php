@@ -155,11 +155,6 @@
                           $('#tablaO').populateTable(values);
                       });
                   }else{
-                  if($('#tablaT').length){
-                      $.getJSON('{{ route('objetivosteo') }}/'+habilidad,null,function(values){
-                          $('#tablaT').populateTable(values);
-                      });
-                  }
                   if($('#objective_id').length){
                       $.getJSON('{{ route('objetivo/')}}/'+habilidad,null,function(values){
                           $('#objective_id').populateSelect(values);
