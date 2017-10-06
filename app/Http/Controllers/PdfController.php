@@ -17,7 +17,7 @@ class PdfController extends Controller
 
 public function descarga1($id){
 
-      $templateword = new TemplateProcessor('syllabus.docx');
+      $templateword = new TemplateProcessor('../../storage/app/syllabus.docx');
         $nombre = "Este es un nombre, por favor funciona";
          $templateword->setValue('nombre_espacio',$nombre);
          $templateword->saveAs("prueba.docx");

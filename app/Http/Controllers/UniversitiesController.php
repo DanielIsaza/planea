@@ -116,7 +116,7 @@ class UniversitiesController extends Controller
 
   public function import(){
     //dd(public_path( ));
-    Excel::load('public/storage/book.csv', function($reader) {
+    Excel::load('public/book.csv', function($reader) {
 
       foreach ($reader->get() as $book) {
             $u = new University();

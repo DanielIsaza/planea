@@ -59,7 +59,7 @@
         var plan = $(this).val();
         var area = $('#knowledgearea_id').val();
         if( plan > 0 && area > 0){
-            $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(valuesT){
+            $.getJSON('{{ route('estadisticaporareateorico') }}/'+plan+'/'+area,null,function(valuesT){
                 $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(values){
                     $('#grafica').graficar(values,valuesT);
                 });
@@ -71,7 +71,7 @@
         var plan = $('#academicplan_id').val();
         var area = $(this).val();
         if( plan > 0 && area > 0){
-            $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(valuesT){
+            $.getJSON('{{ route('estadisticaporareateorico') }}/'+plan+'/'+area,null,function(valuesT){
                 $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(values){
                     $('#grafica').graficar(values,valuesT);
                 });

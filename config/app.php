@@ -180,6 +180,7 @@ return [
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Styde\Html\HtmlServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
