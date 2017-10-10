@@ -18,7 +18,7 @@ class PdfController extends Controller
 public function descarga1($id){
 
       //$templateword = new TemplateProcessor(storage_path().'/app'.'/syllabus.docx');
-      $templateword = new TemplateProcessor('syllabus.docx');
+      $templateword = new TemplateProcessor('storage/syllabus.docx');
 
         $nombre = "Este es un nombre, por favor funciona";
          $templateword->setValue('nombre_espacio',$nombre);
@@ -38,9 +38,10 @@ public function descarga1($id){
      $nombre = $file->getClientOriginalName();
 
      //indicamos que queremos guardar un nuevo archivo en el disco local
-     \Storage::disk()->put($nombre,  \File::get($file));
+     \Storage::disk()->put('public/'.$nombre,  \File::get($file));
      //\Storage::move($nombre,$nombre);
 
-     return "archivo guardado";
+      \Alert::message('Archivo subido correctamente', 'success');
+          return view("pdf.formulario");
   }
 }
