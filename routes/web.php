@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'],function(){
 	//Ruta para el home de la aplicacion
 Route::get('/', 'HomeController@index');
 //'MainController@home');
-Route::get('import','UniversitiesController@import');
+Route::get('importarUniversidades','UniversitiesController@import');
 	//Rutas para el CRUD de Estados
 Route::resource('estados','StatesController');
 //Rutas para el CRUD de Tipos de habilidad
@@ -182,8 +182,8 @@ Route::get('/home', 'HomeController@index');
 //
 Route::get('prueba',[function(){
 
-
-	$ac = array(App\knowledgearea::all());
+dd(storage_path());
+	//$ac = array(App\knowledgearea::all());
 	/*$espacios = array(App\Academicspace::find(3));
 
 	foreach ($espacios as $esp) {

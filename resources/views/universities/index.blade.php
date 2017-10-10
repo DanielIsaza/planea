@@ -35,8 +35,11 @@
 			</div>
 	</div>
 	<div style="float:top; text-align:right;">
-					<a href="{{url('/universidades/create')}}" class="btn btn-primary btn-fab">
+			<a href="{{url('/universidades/create')}}" class="btn btn-primary btn-fab">
 					<i class="glyphicon glyphicon-plus"></i>
 			</a>
-			</div>
+			<a href="{{url('/importarUniversidades')}}" class="btn btn-primary btn-fab">
+				Importar
+			</a>
+	</div>
 @endsection

@@ -113,18 +113,17 @@ class UniversitiesController extends Controller
           return redirect('/universidades');
       }
   }
-
+  /**
+   * permite crear las universidades a partir de un archivo excel
+   */
   public function import(){
-    //dd(public_path( ));
-    Excel::load('public/book.csv', function($reader) {
-
+      Excel::load('public/universidades.csv', function($reader) {
       foreach ($reader->get() as $book) {
             $u = new University();
             $u->nombre = $book->nombre;
             $u->save();
             }
-
-});
+      });
   }
 
 }
