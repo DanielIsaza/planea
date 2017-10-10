@@ -50,11 +50,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-<<<<<<< HEAD
             'root' => public_path().'/storage',// storage_path('app/public'),
-=======
-            'root' => storage_path('app/public'),
->>>>>>> parent of 2032024... Arreglo de bug pesos
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

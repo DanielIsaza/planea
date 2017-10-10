@@ -15,6 +15,7 @@
 		<table id="tabla" class="table table-bordered">
 			<thead>
 				<tr>
+					<td>Id</td>
 					<td>Nombre</td>
 					<td>Estado</td>
 					<td>Acciones</td>
@@ -40,6 +41,7 @@
                 rows += '<tbody>';
                 $.each(values, function(key,row){
                 	rows += '<tr>';
+                    rows += '<td>'+row.value+'</td>';
                     rows += '<td>'+row.text+'</td>';
                     rows += '<td>'+row.estado+'</td>'
                     rows += '<td><div class="row"><div class="col-xs-1">';

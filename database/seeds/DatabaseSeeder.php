@@ -170,23 +170,23 @@ class DatabaseSeeder extends Seeder
         ]]);
 
     DB::table('objectiveespaces')->insert([
-      [
-        'academicspace_id'=>1,
-        'objective_id'=>1,
-        'peso'=>5
-      ],[
-        'academicspace_id'=>1,
-        'objective_id'=>2,
-        'peso'=>7
-      ],[
-        'academicspace_id'=>2,
-        'objective_id'=>3,
-        'peso'=>9
-      ],[
-        'academicspace_id'=>2,
-        'objective_id'=>4,
-        'peso'=>2
-      ]
+        [
+          'academicspace_id'=>1,
+          'objective_id'=>1,
+          'peso'=>5
+        ],[
+          'academicspace_id'=>1,
+          'objective_id'=>2,
+          'peso'=>7
+        ],[
+          'academicspace_id'=>2,
+          'objective_id'=>3,
+          'peso'=>9
+        ],[
+          'academicspace_id'=>2,
+          'objective_id'=>4,
+          'peso'=>2
+        ]
     ]);
     }
 }

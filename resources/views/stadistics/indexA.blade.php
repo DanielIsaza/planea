@@ -59,13 +59,8 @@
         var plan = $(this).val();
         var area = $('#knowledgearea_id').val();
         if( plan > 0 && area > 0){
-<<<<<<< HEAD
             $.getJSON('{{ route('estadisticaporareateorico') }}/'+plan+'/'+area,null,function(valuesT){
                 $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(values){
-=======
-            $.getJSON('{{ route('estadisticaa') }}/'+plan+'/'+area+'/0',null,function(valuesT){
-                $.getJSON('{{ route('estadisticaa') }}/'+plan+'/'+area+'/1',null,function(values){
->>>>>>> parent of 2032024... Arreglo de bug pesos
                     $('#grafica').graficar(values,valuesT);
                 });
             });
@@ -76,13 +71,8 @@
         var plan = $('#academicplan_id').val();
         var area = $(this).val();
         if( plan > 0 && area > 0){
-<<<<<<< HEAD
             $.getJSON('{{ route('estadisticaporareateorico') }}/'+plan+'/'+area,null,function(valuesT){
                 $.getJSON('{{ route('estadisticaporarea') }}/'+plan+'/'+area,null,function(values){
-=======
-            $.getJSON('{{ route('estadisticaa') }}/'+plan+'/'+area+'/0',null,function(valuesT){
-                $.getJSON('{{ route('estadisticaa') }}/'+plan+'/'+area+'/1',null,function(values){
->>>>>>> parent of 2032024... Arreglo de bug pesos
                     $('#grafica').graficar(values,valuesT);
                 });
             });

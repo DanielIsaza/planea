@@ -7,6 +7,7 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+					<td>Id</td>
 					<td>Nombre</td>
 					<td>Acciones</td>
 				</tr>
@@ -14,6 +15,7 @@
 			<tbody>
 				@foreach($areas as $area)
 					<tr>
+						<td>{{ $area->id }}</td>
 						<td>{{ $area->nombre }}</td>
 						<td>
 							<div class="row">

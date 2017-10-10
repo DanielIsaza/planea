@@ -8,6 +8,7 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+					<td>Id</td>
 					<td>Nombre</td>
 					<td>Acciones</td>
 				</tr>
@@ -15,6 +16,7 @@
 			<tbody>
 				@foreach($estados as $estado)
 					<tr>
+						<td>{{ $estado->id }}</td>
 						<td>{{ $estado->nombre }}</td>
 						<td>
 							<div class="row">
