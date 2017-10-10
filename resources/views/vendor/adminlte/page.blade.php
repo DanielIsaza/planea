@@ -103,6 +103,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            {!! Alert::render() !!}
             @if(config('adminlte.layout') == 'top-nav')
             <div class="container">
             @endif

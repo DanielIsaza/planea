@@ -15,6 +15,7 @@ use App\Academicplan;
 use App\Nature;
 use App\Semester;
 use App\Knowledgearea;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AcademicspacesController extends Controller
 {
@@ -223,4 +224,30 @@ class AcademicspacesController extends Controller
           return redirect('/espaciosacademicos');
       }
   }
+  /**
+   * permite crear los espacios a partir de un archivo excel
+   */
+  public function import(){
+    if(\Storage::disk('local')->exists('/public/prueba.csv')){
+      Excel::load('public/storage/prueba.csv', function($reader) {
+        foreach ($reader->get() as $book) {
+          $espacio = new Academicspace();
+          $espacio->codigo = $book->codigo;
+          $espacio->nombre = $book->nombre;
+          $espacio->requisitos = explode(",",$book->requisitos);
+          $espacio->corequisitos = explode(",",$book->corequisitos);
+          dd($espacio);
+        }
+      });
+      
+      \Alert::message('planes académicos importados exitosamente', 'success');
+      return redirect('/planesacademicos');
+    }else{
+      \Alert::message('El archivo planes.csv no existe, importalo por favor', 'danger');
+      return redirect('/planesacademicos');
+    }
+  }
+  /**
+  *w
+  */
 }

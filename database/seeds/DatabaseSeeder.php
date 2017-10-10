@@ -35,6 +35,22 @@ class DatabaseSeeder extends Seeder
         'nombre'=>'Semestre 1',
       ],[
         'nombre'=>'Semestre 2',
+      ],[
+        'nombre'=>'Semestre 3',
+      ],[
+        'nombre'=>'Semestre 4',
+      ],[
+        'nombre'=>'Semestre 5',
+      ],[
+        'nombre'=>'Semestre 6',
+      ],[
+        'nombre'=>'Semestre 7',
+      ],[
+        'nombre'=>'Semestre 8',
+      ],[
+        'nombre'=>'Semestre 9',
+      ],[
+        'nombre'=>'Semestre 10',
       ]]);
 
       DB::table('states')->insert([[

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Academicprogram;
 use App\Faculty;
 use App\University;
-use Yajra\Datatables\Datatables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AcademicprogramsController extends Controller
 {
@@ -117,4 +117,25 @@ class AcademicprogramsController extends Controller
             return redirect('/programasacademicos');
         }
     }
+    /**
+   * permite crear los programas a partir de un archivo excel
+   */
+  public function import(){
+    if(\Storage::disk('local')->exists('/public/programas.csv')){
+      Excel::load('public/storage/programas.csv', function($reader) {
+        foreach ($reader->get() as $book) {
+          $programa = new Faculty();
+          $programa->nombre = $book->nombre;
+          $programa->faculty_id = intval($book->faculty_id);
+          $programa->save();
+        }
+      });
+      
+      \Alert::message('Programas académicos importados exitosamente', 'success');
+      return redirect('/programas');
+    }else{
+      \Alert::message('El archivo programas.csv no existe, importalo por favor', 'danger');
+      return redirect('/programas');
+    }
+  }
 }

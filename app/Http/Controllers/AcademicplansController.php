@@ -8,6 +8,7 @@ use App\Academicprogram;
 use App\Faculty;
 use App\University;
 use App\State;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AcademicplansController extends Controller
 {
@@ -128,5 +129,28 @@ class AcademicplansController extends Controller
           \Alert::message('No sé puede eliminar el plan académico', 'danger');
           return redirect('/planesacademicos');
       }
+  }
+   /**
+   * permite crear los planes a partir de un archivo excel
+   */
+  public function import(){
+    if(\Storage::disk('local')->exists('/public/planes.csv')){
+      Excel::load('public/storage/planes.csv', function($reader) {
+        foreach ($reader->get() as $book) {
+          $plan = new Academicplan();
+          $plan->nombre = $book->nombre;
+          $plan->academicprogram_id = intval($book->academicprogram_id);
+          $plan->state_id = intval($book->state_id);
+          $plan->perfil = $book->perfil;
+          $plan->save();
+        }
+      });
+      
+      \Alert::message('planes académicos importados exitosamente', 'success');
+      return redirect('/planesacademicos');
+    }else{
+      \Alert::message('El archivo planes.csv no existe, importalo por favor', 'danger');
+      return redirect('/planesacademicos');
+    }
   }
 }

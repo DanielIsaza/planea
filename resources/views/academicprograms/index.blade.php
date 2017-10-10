@@ -19,12 +19,14 @@
 		</table>
 	</div>
 </div>
-
-		<div style="float:top; text-align:right;">
-			<a href="{{url('/programasacademicos/create')}}" class="btn btn-primary btn-fab">
-				<i class="glyphicon glyphicon-plus"></i>
-			</a>
-		</div>
+<div style="float:top; text-align:right;">
+	<a href="{{url('/importarProgramas')}}" class="btn btn-success btn-fab">
+		Cargar desde archivo
+	</a>
+	<a href="{{url('/programasacademicos/create')}}" class="btn btn-primary btn-fab">
+		<i class="glyphicon glyphicon-plus"></i>
+	<a>
+</div>
 @endsection
 @section("tabla")
 <script>
