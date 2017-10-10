@@ -20,7 +20,6 @@
 		<table id = "tabla" class="table table-bordered">
 			<thead>
 				<tr>
-					<td>Id</td>
 					<td>Nombre</td>
 					<td>Peso</td>
 					<td>Acciones</td>
@@ -44,16 +43,15 @@
                 rows += '<tbody>';
                 $.each(values, function(key,row){
                 	rows += '<tr>'
-                    rows += '<td>'+row.value+'</td>';
                     rows += '<td>'+row.text+'</td>';
                     rows += '<td>'+row.peso+'</td>';
                     rows += '<td><div class="row"><div class="col-xs-1">';
-					rows += "<a href='{{ URL::asset('objetivos') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i> </a>";
-					rows += '</div><div class="col-xs-6">';
+										rows += "<a href='{{ URL::asset('objetivos') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i> </a>";
+										rows += '</div><div class="col-xs-6">';
                     rows += "<form action='{{ URL::asset('objetivos') }}/"+row.value+"' method='POST' class='inline-block'>"+
-                    	"<input name='_method' type='hidden' value='DELETE'>"+
-                    	"<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+
-                    	"<button type='submit' class='btn btn-link red-text no-padding no-margin no-transform'><i class='material-icons'>delete_sweep</i></button>"+"</form>";
+                    "<input name='_method' type='hidden' value='DELETE'>"+
+                    "<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+
+                    "<button type='submit' class='btn btn-link red-text no-padding no-margin no-transform'><i class='material-icons'>delete_sweep</i></button>"+"</form>";
                     rows += '</div></div></td></tr>';
                 });
                 rows += '</tbody>';

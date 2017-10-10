@@ -17,7 +17,6 @@
 			<table id = "tabla" class="table table-bordered">
 				<thead>
 					<tr>
-						<td>Id</td>
 						<td>Nombre</td>
 						<td>Acciones</td>
 					</tr>
@@ -39,13 +38,12 @@
                 rows += '<tbody>';
                 $.each(values, function(key,row){
                 	rows += '<tr>';
-                    rows += '<td>'+row.value+'</td>';
                     rows += '<td>'+row.text+'</td>';
                     rows += '<td> <div class"row"> <div class="col-xs-1">';
-					rows += "<a href='{{ URL::asset('descarga') }}/"+row.value+"'><i class='material-icons'>get_app</i>  </a>";
-					rows += '</div> <div class="col-xs-1">';
-					rows += "<a href='{{ URL::asset('espaciosacademicos') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i></a>";
-					rows += '</div> <div class="col-xs-1">';
+										rows += "<a href='{{ URL::asset('descarga') }}/"+row.value+"'><i class='material-icons'>get_app</i>  </a>";
+										rows += '</div> <div class="col-xs-1">';
+										rows += "<a href='{{ URL::asset('espaciosacademicos') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i></a>";
+										rows += '</div> <div class="col-xs-1">';
                     rows += "<form action='{{ URL::asset('espaciosacademicos') }}/"+row.value+"' method='POST' class='inline-block'>"+
                     "<input name='_method' type='hidden' value='DELETE'>"+
                     "<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+

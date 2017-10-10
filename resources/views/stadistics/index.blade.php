@@ -55,8 +55,13 @@
     $('#academicplan_id').change(function(){
         var plan = $(this).val();
         if( plan > 0){
+<<<<<<< HEAD
             $.getJSON('{{ route('estadisticaporplanteorico') }}/'+plan,null,function(valuesT){
                 $.getJSON('{{ route('estadisticaporplan') }}/'+plan,null,function(values){
+=======
+            $.getJSON('{{ route('estadisticah') }}/'+plan+'/0',null,function(valuesT){
+                $.getJSON('{{ route('estadisticah') }}/'+plan+'/1',null,function(values){
+>>>>>>> parent of 2032024... Arreglo de bug pesos
                     $('#grafica').graficar(values,valuesT);
                 });
             });

@@ -14,7 +14,6 @@
 				<tbody>
 					@foreach($tiposHabilidades as $tipoHabilidad)
 						<tr>
-							<td>{{ $tipoHabilidad->id }}</td>
 							<td>{{ $tipoHabilidad->nombre }}</td>
 							<td>
 								<div class="row">

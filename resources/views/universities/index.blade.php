@@ -7,7 +7,6 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<td>Id</td>
 						<td>Nombre</td>
 						<td>Acciones</td>
 					</tr>
@@ -15,7 +14,6 @@
 				<tbody>
 					@foreach($universidades as $universidad)
 						<tr>
-							<td>{{ $universidad->id }}</td>
 							<td>{{ $universidad->nombre }}</td>
 							<td>
 								<div class="row">

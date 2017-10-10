@@ -1274,6 +1274,7 @@ Stack trace:
 #51 C:\xampp\htdocs\planea\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 C:\xampp\htdocs\planea\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #53 {main}  
+<<<<<<< HEAD
 [2017-10-03 16:38:35] local.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'App\Http\Controllers\Storage' not found in C:\xampp\htdocs\planea\app\Http\Controllers\PdfController.php:28
 Stack trace:
 #0 [internal function]: App\Http\Controllers\PdfController->descarga1('1')
@@ -7513,3 +7514,5 @@ Stack trace:
 #51 /Applications/XAMPP/xamppfiles/htdocs/planea/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(116): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #52 /Applications/XAMPP/xamppfiles/htdocs/planea/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #53 {main}  
+=======
+>>>>>>> parent of 2032024... Arreglo de bug pesos
