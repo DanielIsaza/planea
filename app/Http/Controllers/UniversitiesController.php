@@ -117,15 +117,15 @@ class UniversitiesController extends Controller
    * permite crear las universidades a partir de un archivo excel
    */
   public function import(){
-    if(\Storage::disk('local')->exists('/public/universidades.csv')){
-      Excel::load('public/storage/universidades.csv', function($reader) {
+    if(\Storage::disk('local')->exists('/public/universidades.xlsx')){
+      Excel::load('public/storage/universidades.xlsx', function($reader) {
       foreach ($reader->get() as $book) {
             $universidad = new University();
             $universidad->nombre = $book->nombre;
             $universidad->save();
             }
       });
-      
+
       \Alert::message('Universidades importadas exitosamente', 'success');
       return redirect('/universidades');
     }else{

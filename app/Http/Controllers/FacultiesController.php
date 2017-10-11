@@ -119,8 +119,8 @@ class FacultiesController extends Controller
    * permite crear las facultades a partir de un archivo excel
    */
   public function import(){
-    if(\Storage::disk('local')->exists('/public/facultades.csv')){
-      Excel::load('public/storage/facultades.csv', function($reader) {
+    if(\Storage::disk('local')->exists('/public/facultades.xls')){
+      Excel::load('public/storage/facultades.xls', function($reader) {
         foreach ($reader->get() as $book) {
           $facultad = new Faculty();
           $facultad->nombre = $book->nombre;
@@ -128,7 +128,7 @@ class FacultiesController extends Controller
           $facultad->save();
         }
       });
-      
+
       \Alert::message('Facultades importadas exitosamente', 'success');
       return redirect('/facultades');
     }else{

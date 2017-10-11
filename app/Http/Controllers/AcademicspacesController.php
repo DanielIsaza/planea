@@ -228,23 +228,51 @@ class AcademicspacesController extends Controller
    * permite crear los espacios a partir de un archivo excel
    */
   public function import(){
-    if(\Storage::disk('local')->exists('/public/prueba.csv')){
-      Excel::load('public/storage/prueba.csv', function($reader) {
+    if(\Storage::disk('local')->exists('/public/espacios.xlsx')){
+      Excel::load('public/storage/espacios.xlsx', function($reader) {
         foreach ($reader->get() as $book) {
           $espacio = new Academicspace();
           $espacio->codigo = $book->codigo;
           $espacio->nombre = $book->nombre;
-          $espacio->requisitos = explode(",",$book->requisitos);
+          $espacio->numeroCreditos = $book->numerocreditos;
+          $espacio->horasTeoricas = $book->horasteoricas;
+          $espacio->horasPracticas = $book->horaspracticas;
+          $espacio->horasTeoPract = $book->horasteopract;
+          $espacio->horasAsesorias = $book->horasasesoria;
+          $espacio->horasIndependiente = $book->horasindependiente;
+          $espacio->habilitable = $book->habilitable;
+          $espacio->validable = $book->validable;
+          $espacio->homologable = $book->homologable;
+          $espacio->nucleoTematico = $book->nucleotematico;
+          $espacio->justificacion = $book->justificacion;
+          $espacio->metodologia = $book->metodologia;
+          $espacio->evaluacion = $book->evaluacion;
+          $espacio->descripcion = $book->descripcion;
+          $espacio->contenidoConceptual = $book->contenidoconceptual;
+          $espacio->contenidoProcedimental = $book->contenidoprocedimental;
+          $espacio->contenidoActitudinal = $book->contenidoactitudinal;
+          $espacio->procesosIntegrativos = $book->procesosintegrativos;
+          $espacio->unidades = $book->unidades;
+          $espacio->semester_id = $book->semester_id;
+          $espacio->academicplan_id = $book->academicplan_id;
+          $espacio->activityacademic_id = $book->activityacademic_id;
+          $espacio->typeevaluation_id = $book->typeevaluation_id;
+          $espacio->typemethodology_id = $book->typemethodology_id;
+          $espacio->nature_id = $book->nature_id;
+          $espacio->knowledgearea_id = $book->knowledgearea_id;
+          /*$espacio->requisitos = explode(",",$book->requisitos);
           $espacio->corequisitos = explode(",",$book->corequisitos);
           dd($espacio);
+          */
+          $espacio->save();
         }
       });
-      
+
       \Alert::message('planes académicos importados exitosamente', 'success');
-      return redirect('/planesacademicos');
+      return redirect('/espaciosacademicos');
     }else{
-      \Alert::message('El archivo planes.csv no existe, importalo por favor', 'danger');
-      return redirect('/planesacademicos');
+      \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
+      return redirect('/espaciosacademicos');
     }
   }
   /**
