@@ -24,6 +24,15 @@ class AcademicplansTable extends Migration
           $table->foreign('academicprogram_id')->references('id')->on('academicprograms');
           $table->foreign('state_id')->references('id')->on('states');
       });
+
+      Schema::create('knowledgeareas', function (Blueprint $table) {
+          $table->increments('id');
+          $table->String('nombre');
+          $table->integer('academicplan_id')->unsigned();
+          $table->timestamps();
+
+          $table->foreign('academicplan_id')->references('id')->on('academicplans');
+      });
     }
 
     /**

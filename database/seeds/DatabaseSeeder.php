@@ -78,6 +78,7 @@ class DatabaseSeeder extends Seeder
 
       DB::table('knowledgeareas')->insert([
         'nombre'=>'area de conocimiento 1',
+        'academicplan_id'=>1,
       ]);
 
       DB::table('activityacademics')->insert([
