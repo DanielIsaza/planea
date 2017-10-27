@@ -13,11 +13,7 @@ class KnowledgeareasTable extends Migration
      */
     public function up()
     {
-        Schema::create('knowledgeareas', function (Blueprint $table) {
-          $table->increments('id');
-          $table->String('nombre');
-          $table->timestamps();
-      });
+        
     }
 
     /**
