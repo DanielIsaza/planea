@@ -122,6 +122,11 @@
                           $('#tabla').populateTable(values);
                       });
                   }
+                  if($('#tablak').length){
+                      $.getJSON('{{ route('area')}}/'+plan,null,function(values){
+                        $('#tablak').populateTable(values);
+                      });
+                  }
               }
           }
           });
