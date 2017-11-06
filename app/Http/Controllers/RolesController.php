@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rol;
+use Ultraware\Roles\Models\Role;
+use Ultraware\Roles\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -14,7 +15,7 @@ class RolesController extends Controller
    */
   public function index()
   {
-      $roles = Rol::all();
+      $roles = Role::all();
       return view("roles.index",["roles"=>$roles]);
   }
   /**
@@ -24,8 +25,9 @@ class RolesController extends Controller
    */
   public function create()
   {
-      $rol = new Rol;
-      return view("roles.create",["rol"=> $rol]);
+      $permisos = Permission::paginate(4);
+      $rol = new Role;
+      return view("roles.create",["rol"=> $rol,"permisos"=>$permisos]);
   }
 
   /**
@@ -36,10 +38,13 @@ class RolesController extends Controller
    */
   public function store(Request $request)
   {
-      $rol = new Rol;
-      $rol->nombre = $request->nombre;
+      $rol = Role::create([
+          'name' => $request->nombre,
+          'slug' => $request->nombre,
+          'description' => $request->descripcion,
+      ]);
 
-      if($rol->save()){
+      if($rol){
           \Alert::message('Rol creado correctamente', 'success');
           return redirect("/roles");
       }else{
@@ -67,7 +72,7 @@ class RolesController extends Controller
    */
   public function edit($id)
   {
-      $rol = Rol::find($id);
+      $rol = Role::find($id);
       return view("roles.edit",["rol"=> $rol]);
   }
 
@@ -80,8 +85,9 @@ class RolesController extends Controller
    */
   public function update(Request $request, $id)
   {
-      $rol = Rol::find($id);
-      $rol->nombre = $request->nombre;
+      $rol = Role::find($id);
+      $rol->name = $request->nombre;
+      $rol->description = $request->descripcion;
 
       if($rol->save()){
           \Alert::message('Rol actualizado correctamente', 'success');
@@ -100,9 +106,13 @@ class RolesController extends Controller
    */
   public function destroy($id)
   {
-      Rol::destroy($id);
-      \Alert::message('Rol eliminado correctamente', 'success');
-      return redirect('/roles');
+      if(Role::destroy($id)){
+        \Alert::message('Rol eliminado correctamente', 'success');
+        return redirect('/roles');
+      }else{
+        \Alert::message('El rol no pudo ser eliminado', 'danger');
+          return redirect('/roles');
+      }     
   }
 
 }

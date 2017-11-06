@@ -17,6 +17,42 @@ class DatabaseSeeder extends Seeder
         'password' => bcrypt('123qwe')
       ]);
 
+      DB::table('permissions')->insert([
+        [
+          'name'=> 'universities.create',
+          'slug' => 'universities.create',
+          'description' => 'Crear universidades'
+        ],[
+          'name'=> 'universities.update',
+          'slug' => 'universities.update',
+          'description' => 'Actualizar universidades'
+        ],[
+          'name'=> 'universities.delete',
+          'slug' => 'universities.delete',
+          'description' => 'Eliminar universidades'
+        ],[
+          'name'=> 'universities.read',
+          'slug' => 'universities.read',
+          'description' => 'Ver universidades'
+        ],[
+          'name'=> 'faculties.create',
+          'slug' => 'faculties.create',
+          'description' => 'Crear facultades'
+        ],[
+          'name'=> 'faculties.update',
+          'slug' => 'faculties.update',
+          'description' => 'Actualizar facultades'
+        ],[
+          'name'=> 'faculties.delete',
+          'slug' => 'faculties.delete',
+          'description' => 'Eliminar facultades'
+        ],[
+          'name'=> 'faculties.read',
+          'slug' => 'faculties.read',
+          'description' => 'Ver facultades'
+        ],
+      ]);
+
       DB::table('universities')->insert([
         'nombre' => 'Universidad del Quindío',
       ]);

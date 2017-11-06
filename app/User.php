@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Bican\Roles\Traits\HasRoleAndPermission;
-use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Ultraware\Roles\Traits\HasRoleAndPermission;
+use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
-
-class User extends Authenticatable implements AuthenticatableContract, CanResetPasswordContract, HasRoleAndPermissionContract
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
-    use Notifiable,Authenticatable, CanResetPassword, HasRoleAndPermission;
+    use Notifiable, HasRoleAndPermission;
 
 
     /**

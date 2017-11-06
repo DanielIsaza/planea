@@ -184,8 +184,7 @@ return [
         /**
          * Third Party Service Providers...
          */
-        Bican\Roles\RolesServiceProvider::class,
-
+        Ultraware\Roles\RolesServiceProvider::class,
     ],
 
     /*

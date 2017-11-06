@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth'],function()
 	Route::resource('asignacionTeorica','ObjectivesspacesTController');
 	//Rutas para el CRUD de las áreas de conocimiento
 	Route::resource('areasconocimiento','KnowledgeareasController');
+	//Ruta que permite listar la cantidad de usuarios en el sistema
+	Route::resource('usuarios','UsersController');
 	// permite obtener las gráficas estadisticas
 	Route::get('estadistica','StadisticsController@index');
 	// permite obtener las gráficas estadisticas

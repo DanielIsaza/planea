@@ -217,19 +217,19 @@ return [
         ],
         '',
         [
-          'text'    => ' usuarios',
+          'text'    => 'Usuarios',
           'icon'    => 'user',
           'submenu' => [
               [
-                  'text' => ' usuarios',
-                  'url'  => '/register',
+                  'text' => 'Usuarios',
+                  'url'  => '/usuarios',
               ],
               [
-                  'text' => ' roles',
+                  'text' => 'Roles',
                   'url'  => '/roles',
               ],
               [
-                  'text' => ' permisos',
+                  'text' => 'Permisos',
                   'url'  => '/autoriza',
               ]
             ],

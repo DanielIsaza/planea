@@ -2,31 +2,29 @@
 
 @section("content")
 <div class="panel panel-default">
-	<div class="panel-heading">Lista de roles</div>
+	<div class="panel-heading">Lista de usuarios</div>
     <div class="panel-body">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<td>Nombre</td>
-					<td>Descripción</td>
 					<td>Acciones</td>
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($roles as $rol)
+				@foreach($usuarios as $usuario)
 					<tr>
-						<td>{{ $rol->name }}</td>
-						<td>{{ $rol->description }}</td>
+						<td>{{ $usuario->name }}</td>
 						<td>
 							<div class="row">
 								<div class="col-xs-1">
-							<a href="{{url('/roles/'.$rol->id.'/edit')}}">
-							<i class="material-icons">mode_edit</i></a>
-						</div>
-						<div class="col-xs-6">
-							@include('roles.delete',['rol'=>$rol])
-						</div>
-					</div>
+									<a href="{{url('/usuarios/'.$usuario->id.'/edit')}}">
+									<i class="material-icons">mode_edit</i></a>
+								</div>
+								<div class="col-xs-6">
+									@include('Auth.delete',['usuario'=>$usuario])
+								</div>
+							</div>
 						</td>
 					</tr>
 				@endforeach
