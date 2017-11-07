@@ -230,7 +230,7 @@ return [
               ],
               [
                   'text' => 'Permisos',
-                  'url'  => '/autoriza',
+                  'url'  => '/permisos',
               ]
             ],
         ],

@@ -5,16 +5,19 @@
 	<div class="panel-heading">Crear espacio académico</div>
     <div class="panel-body">
 		{!!Form::open(['url'=> '/espaciosacademicos/','method' => 'POST']) !!}
-			<div class="row">
+			<fieldset style="border:1px groove;">
+			<legend style="width: inherit;border-bottom: 1px;padding: 5px;">Primera parte</legend>
+			<div class="row" style="margin:0px 10px 20px;">
 		   		<div class="col-md-4">{!! Field::select('university_id',$universidades) !!}</div>
 		    	<div class="col-md-4">{!! Field::select('faculty_id') !!}</div>
 		    	<div class="col-md-4">{!! Field::select('academicprogram_id') !!}</div>
 		  	</div>
-		  	<div class="row">
+		  	<div class="row" style="margin:0px 10px 20px;">
 		  		<div class="col-md-4">{!! Field::select('academicplan_id') !!}	</div>
 		  		<div class="col-md-4">{!! Field::select('semester_id',$semestres) !!}</div>
 		  		<div class="col-md-4">{!! Field::select('activityacademic_id',$actividadesAca) !!}</div>
 		  	</div>
+	 		</fieldset>
 		  	<div class="row">
 		  		<div class="col-md-3">{!! Field::select('typeevaluation_id',$tipoEvaluaciones) !!}</div>
 		  		<div class="col-md-3">{!! Field::select('typemethodology_id',$tipoMetodologias) !!}</div>
@@ -82,16 +85,10 @@
 		  	</div>
 			<div class="row">
 				<div class="col-md-6" id="drequisitos">
-					{{Form::label('Requisitos')}}
-					<a id="requisito">
-						<i class="material-icons" style="font-size: 1,5em">add_circle</i>
-					</a>
+					{!! Field::select('Requisitos[]',$espacios,null,['class'=> 'form-control espacios','multiple']) !!}
 				</div>
 				<div class="col-md-6" id="dcorequisito">
-					{{Form::label('Co-Requisitos')}}
-					<a id="corequisito">
-						<i class="material-icons" style="font-size: 1,5em">add_circle</i>
-					</a>
+					{!! Field::select('Co-Requisitos[]',$espacios,null,['class'=> 'form-control espacios','multiple']) !!}
 				</div>
 			</div>
 			<div class="row">
@@ -173,50 +170,11 @@
 {!! Form::close() !!}
 @endsection
 @section("tabla")
-	<script type="text/javascript">
-		//variable que define el id del select que contiene los requisitos para la materia
-		var id = 1;
-		//variable que define el id del select que contiene los corequisitos para la materia
-		var idc = 1;
-
-		function llenarRequisitos ($tipo)
-		{
-			var plan = $('#academicplan_id').val();
-			$.getJSON('{{ route('espaciosporplan' )}}/'+plan,null,function(values){
-					var options = '';
-					options += '<option value = "'+-1+'"> Seleccione una opción </option>';
-					$.each(values, function (key, row) {
-							options += '<option value="' + row.value + '">' + row.text + '</option>';
-					});
-					if($tipo == 1 ){
-						$("#selectr"+id).html(options);
-						id++;
-					}
-					else{
-						$("#selectc"+idc).html(options);
-						idc++;
-					}
-			});
-		}
-
-		$('#requisito').click(function (){
-			var plan = $('#academicplan_id').val();
-			if(plan > -1 && plan != null){
-				$('#drequisitos').append('<div class="controls"><select class="form-control" id="selectr'+id+'" name="Espacio académico"><option value="" selected="selected"></option></select> </div>');
-				llenarRequisitos(1);
-			}else {
-				alert('Primero seleccione un plan académico');
-			}
-		});
-
-		$('#corequisito').click(function (){
-			var plan = $('#academicplan_id').val();
-			if(plan > -1 && plan != null){
-				$('#dcorequisito').append('<div class="controls"><select class="form-control" id="selectc'+idc+'" name="Espacio académico"><option value="" selected="selected"></option></select> </div>');
-				llenarRequisitos(2);
-			}else {
-				alert('Primero seleccione un plan académico');
-			}
+	<script> $(function() { $('textarea').froalaEditor() }); 
+	$(".espacios").chosen({
+			placeholder_text_multiple: 'Seleccione los espacios académicos',
+			search_contains: true,
+			no_results_text: 'No hay permisos con ese nombre'
 		});
 	</script>
 @endsection

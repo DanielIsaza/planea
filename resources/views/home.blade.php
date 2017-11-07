@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-    <p>Está es la introducción del software</p>
+	<p> Hola! <?php print_r(Auth::user()->name); ?> está es la introducción del software</p>
 @stop

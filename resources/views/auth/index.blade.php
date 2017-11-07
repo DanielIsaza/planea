@@ -8,6 +8,8 @@
 			<thead>
 				<tr>
 					<td>Nombre</td>
+					<td>Correo</td>
+					<td>Rol</td>
 					<td>Acciones</td>
 				</tr>
 			</thead>
@@ -15,6 +17,8 @@
 				@foreach($usuarios as $usuario)
 					<tr>
 						<td>{{ $usuario->name }}</td>
+						<td>{{ $usuario->email }}</td>
+						<td>{{ $usuario->roles[0]->name }}</td>
 						<td>
 							<div class="row">
 								<div class="col-xs-1">
@@ -33,7 +37,7 @@
 	</div>
 </div>
 <div style="float:top; text-align:right;">
-	<a href="{{url('/roles/create')}}" class="btn btn-primary btn-fab">
+	<a href="{{url('/usuarios/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>
 </div>

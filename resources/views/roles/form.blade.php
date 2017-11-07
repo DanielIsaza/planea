@@ -7,33 +7,23 @@
 		</div>
 		<div>
 			{{ Form::label('Descripción') }}
-			{{ Form::text('descripcion',$rol->description,['class'=> 'form-control','placeholder'=>'Descripción del rol']) }}
+			{{ Form::text('descripcion',$rol->description,['class'=> 'form-control','placeholder'=>'Descripción del rol','required']) }}
 		</div>
-	</div>
-	<div>
-		{{ Form::label('Roles disponibles')}}
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<td>Nombre</td>
-					<td>Descripción</td>
-					<td>Seleccionar</td>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($permisos as $permiso)
-				<tr>
-					<td>{{ $permiso->name }}</td>
-					<td>{{ $permiso->description }}</td>
-					<td><input type="checkbox" aria-label="..."></td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-				{{ $permisos->links() }}
+		<div>
+			{!! Field::select('permisos[]',$permisos,$permiso,['class'=>'form-control permisos','multiple'=>true]) !!}
+		</div>
 	</div>
 	<div class="form-group text-	">
 		<a href="{{url('/roles')}}">Regresar al listado de roles</a>
 		<input type="submit" value="Guardar" class="btn btn-success">
 	</div>
 {!! Form::close() !!}
+@section('tabla')
+	<script type="text/javascript">
+		$(".permisos").chosen({
+			placeholder_text_multiple: 'Seleccione los permisos del rol',
+			search_contains: true,
+			no_results_text: 'No hay permisos con ese nombre'
+		});
+	</script>
+@endsection

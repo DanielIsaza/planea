@@ -55,8 +55,6 @@ Route::group(['middleware' => 'auth'],function()
 	Route::resource('objetivos','ObjectivesController');
 	//Rutas para el manejo de la asignación de los pesos
 	Route::resource('asignacion','ObjectivespacesController');
-	//Rutas para autorización de usuarios
-	Route::resource('autoriza','AutorizesController');
 	//Rutas para el manejo de la asignación teorica de los pesos
 	Route::resource('asignacionTeorica','ObjectivesspacesTController');
 	//Rutas para el CRUD de las áreas de conocimiento
@@ -75,6 +73,8 @@ Route::group(['middleware' => 'auth'],function()
 	Route::get('formulario','PdfController@formulario');
 	//Ruta que permite subir un archivo 
 	Route::post('subir','PdfController@subir');
+	//Ruta que permite ver todos los permisos disponibles en el sistema
+	Route::get('permisos','RolesController@permisos');
 	//Ruta que retorna todas las facultades
 	Route::get('facultad/{university_id?}',["as" => "facultad/",function($university_id){
 		return App\Faculty::where('university_id',$university_id)

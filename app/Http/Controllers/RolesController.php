@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Ultraware\Roles\Models\Role;
 use Ultraware\Roles\Models\Permission;
+use App\User;
 
 class RolesController extends Controller
 {
@@ -25,9 +26,20 @@ class RolesController extends Controller
    */
   public function create()
   {
-      $permisos = Permission::paginate(4);
+      $permisos = Permission::pluck('name','id')->toArray();
       $rol = new Role;
-      return view("roles.create",["rol"=> $rol,"permisos"=>$permisos]);
+      return view("roles.create",["rol"=> $rol,"permisos"=>$permisos,"permiso"=>null]);
+  }
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function permisos()
+  {
+      $permisos = Permission::all();
+      return view("roles.indexp",["permisos"=>$permisos]);
   }
 
   /**
@@ -39,11 +51,16 @@ class RolesController extends Controller
   public function store(Request $request)
   {
       $rol = Role::create([
-          'name' => $request->nombre,
-          'slug' => $request->nombre,
-          'description' => $request->descripcion,
+        'name' => $request->nombre,
+        'slug' => $request->nombre,
+        'description' => $request->descripcion,
       ]);
 
+      for ($i=0; $i < sizeof($request->permisos); $i++) { 
+        $rol->attachPermission($request->permisos[$i]);
+      }
+
+      dd($rol);
       if($rol){
           \Alert::message('Rol creado correctamente', 'success');
           return redirect("/roles");
@@ -59,9 +76,9 @@ class RolesController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show()
   {
-      //
+      
   }
 
   /**
@@ -73,7 +90,12 @@ class RolesController extends Controller
   public function edit($id)
   {
       $rol = Role::find($id);
-      return view("roles.edit",["rol"=> $rol]);
+      $permisos = Permission::pluck('name','id')->toArray();
+      $permiso = array();
+      for($i = 0; $i < sizeof($rol->permissions); $i++){
+         array_push($permiso, $rol->permissions[$i]->id);
+      } 
+      return view("roles.edit",["rol"=> $rol,"permisos"=>$permisos,"permiso"=>$permiso]);
   }
 
   /**
@@ -88,6 +110,11 @@ class RolesController extends Controller
       $rol = Role::find($id);
       $rol->name = $request->nombre;
       $rol->description = $request->descripcion;
+      $rol->detachAllPermissions();
+      
+      for ($i=0; $i < sizeof($request->permisos); $i++) { 
+        $rol->attachPermission($request->permisos[$i]);
+      }
 
       if($rol->save()){
           \Alert::message('Rol actualizado correctamente', 'success');

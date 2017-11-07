@@ -44,8 +44,9 @@ class AcademicspacesController extends Controller
       $naturalezas = Nature::pluck('nombre','id')->toArray();
       $semestres = Semester::pluck('nombre','id')->toArray();
       $areas = Knowledgearea::pluck('nombre','id')->toArray();
+      $espacios = Academicspace::pluck('nombre','id')->toArray();
 
-      return view("academicspaces.create",["universidades"=>$universidades,"tipoEvaluaciones"=>$tipoEvaluaciones,"tipoMetodologias"=>$tipoMetodologias,"actividadesAca"=>$actividadesAca,"naturalezas"=>$naturalezas,"semestres"=>$semestres,"areas"=>$areas]);
+      return view("academicspaces.create",["universidades"=>$universidades,"tipoEvaluaciones"=>$tipoEvaluaciones,"tipoMetodologias"=>$tipoMetodologias,"actividadesAca"=>$actividadesAca,"naturalezas"=>$naturalezas,"semestres"=>$semestres,"areas"=>$areas,"espacios"=>$espacios]);
   }
 
   /**
