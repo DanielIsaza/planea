@@ -18,11 +18,12 @@ class AcademicspacesTable extends Migration
         $table->string('codigo');
         $table->string('nombre');
         $table->string('numeroCreditos',2);
-        $table->string('horasTeoricas',2);
-        $table->string('horasPracticas',2);
-        $table->string('horasTeoPract',2);
-        $table->string('horasAsesorias',2);
-        $table->string('horasIndependiente',2);
+        $table->string('horasSemanales',10);
+        $table->string('horasTeoricas',10);
+        $table->string('horasPracticas',10);
+        $table->string('horasTeoPract',10);
+        $table->string('horasAsesorias',10);
+        $table->string('horasIndependiente',10);
         $table->boolean('habilitable');
         $table->boolean('validable');
         $table->boolean('homologable');
@@ -31,11 +32,17 @@ class AcademicspacesTable extends Migration
         $table->string('metodologia',700);
         $table->string('evaluacion',700);
         $table->string('descripcion',700);
+        $table->string('competenciasPropias',700);
         $table->string('contenidoConceptual',700);
         $table->string('contenidoProcedimental',700);
         $table->string('contenidoActitudinal',700);
         $table->string('procesosIntegrativos',700);
         $table->string('unidades',9000);
+        $table->string('bibliografia',1000);
+        $table->string('recursosElectronicos',1000);
+        $table->string('historialRevision',1000);
+        $table->string('vigencia',200);
+        $table->string('responsables',100);
 
         $table->integer('semester_id')->unsigned();
         $table->integer('academicplan_id')->unsigned();
