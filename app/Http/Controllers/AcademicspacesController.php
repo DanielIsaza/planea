@@ -16,6 +16,7 @@ use App\Nature;
 use App\Semester;
 use App\Knowledgearea;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Requirement;
 
 class AcademicspacesController extends Controller
 {
@@ -85,6 +86,7 @@ class AcademicspacesController extends Controller
       $espacio->recursosElectronicos = $request->recursosElectronicos;
       $espacio->vigencia = $request->vigencia;
       $espacio->responsables = $request->responsables;
+      $espacio->historialRevision = $request->historialRevision;
 
       $espacio->academicplan_id = $request->academicplan_id;
       $espacio->semester_id = $request->semester_id;
@@ -95,6 +97,15 @@ class AcademicspacesController extends Controller
       $espacio->knowledgearea_id = $request->knowledgearea_id;
 
       if($espacio->save()){
+
+          for ($i=0; $i < sizeof($request->requisitos); $i++) { 
+              Requirement::create([
+                'academicspaceD_id' => $espacio->id,
+                'academicspace_id' => $request->requisitos[$i],
+                'tipo' => 1
+              ]);
+          }
+
           \Alert::message('Espacio académico creado correctamente', 'success');
           return redirect("/espaciosacademicos");
       }else{

@@ -17,7 +17,7 @@ class PdfController extends Controller
 
 public function descarga1($id){
     $espacio = Academicspace::find($id);
-    dd($espacio->requirement);
+
     $templateword = new TemplateProcessor('storage/syllabus.docx');
 
     $templateword->setValue('nombre',$espacio->nombre);
@@ -52,9 +52,15 @@ public function descarga1($id){
     $templateword->setValue('historialRevision',$espacio->historialRevision);
     $templateword->setValue('vigencia',$espacio->vigencia);
     $templateword->setValue('responsables',$espacio->responsables);    
-    
-    $templateword->saveAs("syllabus_".$espacio->nombre.".docx");
+    $requisitos = "";
 
+    for ($i=0; $i < sizeof($espacio->requirement); $i++) { 
+      $requisitos = $requisitos." ".Academicspace::find($espacio->requirement[$i]->academicspace_id)->nombre;
+    }
+    //$templateword->setValue('requisitos',$requisitos);
+
+
+    $templateword->saveAs("syllabus_".$espacio->nombre.".docx");
     return response()->download("syllabus_".$espacio->nombre.".docx")->deleteFileAfterSend(true);
 }
 

@@ -210,7 +210,7 @@
 			<div class="row" style="margin:0px 10px 20px;">
 				<div class="col-md-13">
 					{{ Form::label('Vigencia')}}
-					{{ Form::textarea('vigencia',$espacio->vigencia,['class' => 'form-control',
+					{{ Form::textarea('vigencia',null,['class' => 'form-control',
 						'placeholder'=>'Vigencia del syllabus']) }}
 				</div>
 			</div>
@@ -218,17 +218,17 @@
 			<div class="row" style="margin:0px 10px 20px;">
 				<div class="col-md-13">
 					{{ Form::label('Responsables')}}
-					{{ Form::textarea('responsables',$espacio->responsables,['class' => 'form-control',
+					{{ Form::textarea('responsables',null,['class' => 'form-control',
 						'placeholder'=>'Responsables del syllabus']) }}
 				</div>
 			</div>
-    	{!! Form::close() !!}
     </div>
 </div>
 <div class="form-group" style="text-align:right">
 	<a href="{{url('/espaciosacademicos')}}">Regresar al listado de espacios académicos</a>
 	<input type="submit" value="Guardar" class="btn btn-success">
 </div>
+    	{!! Form::close() !!}
 @endsection
 @section("tabla")
 	<script> $(function() { $('textarea').froalaEditor() }); 
