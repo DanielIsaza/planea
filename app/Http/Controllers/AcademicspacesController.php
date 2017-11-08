@@ -61,6 +61,7 @@ class AcademicspacesController extends Controller
       $espacio->codigo = $request->codigo;
       $espacio->nombre = $request->nombre;
       $espacio->numeroCreditos = $request->numeroCreditos;
+      $espacio->horasSemanales = $request->horasSemanales;
       $espacio->horasTeoricas = $request->horasTeoricas;
       $espacio->horasPracticas = $request->horasPracticas;
       $espacio->horasTeoPract = $request->horasTeoPract;
@@ -74,11 +75,16 @@ class AcademicspacesController extends Controller
       $espacio->metodologia = $request->metodologia;
       $espacio->evaluacion = $request->evaluacion;
       $espacio->descripcion = $request->descripcion;
+      $espacio->competenciasPropias = $request->competenciasPropias;
       $espacio->contenidoConceptual = $request->contenidoConceptual;
       $espacio->contenidoProcedimental  = $request->contenidoProcedimental;
       $espacio->contenidoActitudinal = $request->contenidoActitudinal;
       $espacio->procesosIntegrativos = $request->procesosIntegrativos;
       $espacio->unidades = $request->unidades;
+      $espacio->bibliografia = $request->bibliografia;
+      $espacio->recursosElectronicos = $request->recursosElectronicos;
+      $espacio->vigencia = $request->vigencia;
+      $espacio->responsables = $request->responsables;
 
       $espacio->academicplan_id = $request->academicplan_id;
       $espacio->semester_id = $request->semester_id;
@@ -140,8 +146,12 @@ class AcademicspacesController extends Controller
       $idPlan = Academicplan::where('id',$espacio->academicplan_id)->select('id','academicprogram_id')->get()[0];
       $idPrograma = Academicprogram::where('id',$idPlan->academicprogram_id)->select('id','faculty_id')->get()[0];
       $idFacultad = Faculty::where('id',$idPrograma->faculty_id)->select('id','university_id')->get()[0];
+      $espacios = Academicspace::where('academicplan_id','=',$espacio->academicplan_id)->pluck('nombre','id')->toArray();
+      
+      $requisito = 1;
+      $corequisito = 1;
 
-      return view("academicspaces.edit",["espacio"=> $espacio,"universidades"=>$universidades,"facultades"=>$facultades,"programas"=>$programas,"planes"=>$planes,"tipoEvaluaciones"=>$tipoEvaluaciones,"tipoMetodologias"=>$tipoMetodologias,"actividadesAca"=>$actividadesAca,"naturalezas"=>$naturalezas,"semestres"=>$semestres,"idPrograma"=>$idPrograma->id,"idFacultad"=>$idFacultad->id,"idUniversidad"=>$idFacultad->university_id,"areas"=>$areas]);
+      return view("academicspaces.edit",["espacio"=> $espacio,"universidades"=>$universidades,"facultades"=>$facultades,"programas"=>$programas,"planes"=>$planes,"tipoEvaluaciones"=>$tipoEvaluaciones,"tipoMetodologias"=>$tipoMetodologias,"actividadesAca"=>$actividadesAca,"naturalezas"=>$naturalezas,"semestres"=>$semestres,"idPrograma"=>$idPrograma->id,"idFacultad"=>$idFacultad->id,"idUniversidad"=>$idFacultad->university_id,"areas"=>$areas,"requisito" => $requisito,"corequisito"=>$corequisito,"espacios"=>$espacios]);
   }
 
   /**
@@ -157,6 +167,7 @@ class AcademicspacesController extends Controller
       $espacio->codigo = $request->codigo;
       $espacio->nombre = $request->nombre;
       $espacio->numeroCreditos = $request->numeroCreditos;
+      $espacio->horasSemanales = $request->horasSemanales;
       $espacio->horasTeoricas = $request->horasTeoricas;
       $espacio->horasPracticas = $request->horasPracticas;
       $espacio->horasTeoPract = $request->horasTeoPract;
@@ -187,10 +198,15 @@ class AcademicspacesController extends Controller
       $espacio->evaluacion = $request->evaluacion;
       $espacio->descripcion = $request->descripcion;
       $espacio->contenidoConceptual = $request->contenidoConceptual;
+      $espacio->competenciasPropias = $request->competenciasPropias;
       $espacio->contenidoProcedimental  = $request->contenidoProcedimental;
       $espacio->contenidoActitudinal = $request->contenidoActitudinal;
       $espacio->procesosIntegrativos = $request->procesosIntegrativos;
       $espacio->unidades = $request->unidades;
+      $espacio->bibliografia = $request->bibliografia;
+      $espacio->recursosElectronicos = $request->recursosElectronicos;
+      $espacio->vigencia = $request->vigencia;
+      $espacio->responsables = $request->responsables;
 
       $espacio->academicplan_id = $request->academicplan_id;
       $espacio->semester_id = $request->semester_id;

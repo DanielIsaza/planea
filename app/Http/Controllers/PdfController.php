@@ -17,25 +17,26 @@ class PdfController extends Controller
 
 public function descarga1($id){
     $espacio = Academicspace::find($id);
+    dd($espacio->requirement);
     $templateword = new TemplateProcessor('storage/syllabus.docx');
-    //dd($espacio);
-    $templateword->setValue('nombre_espacio',$espacio->nombre);
+
+    $templateword->setValue('nombre',$espacio->nombre);
     $templateword->setValue('descripcion',$espacio->descripcion);
     $templateword->setValue('justificacion',$espacio->justificacion);
     $templateword->setValue('descripcion',$espacio->descripcion);
     $templateword->setValue('horasTeoricas',$espacio->horasTeoricas);
     $templateword->setValue('horas_semestre',intval($espacio->horasTeoricas)*16);
     $templateword->setValue('metodologia',$espacio->metodologia);
-    $templateword->setValue('codigo_materia',$espacio->codigo);
+    $templateword->setValue('codigo',$espacio->codigo);
     $templateword->setValue('tipo_actividad',$espacio->activityacademic->nombre);
     $templateword->setValue('semestre',$espacio->semester->nombre);
     $templateword->setValue('naturaleza',$espacio->nature->nombre);
-    $templateword->setValue('nucleo_tematico',$espacio->nucleoTematico);
-    $templateword->setValue('num_creditos',$espacio->numeroCreditos);
+    $templateword->setValue('nucleoTematico',$espacio->nucleoTematico);
+    $templateword->setValue('numeroCreditos',$espacio->numeroCreditos);
     $templateword->setValue('tipo_evaluacion',$espacio->typeevaluation->nombre);
-    $templateword->setValue('horas_docencia',$espacio->horasTeoricas);
-    $templateword->setValue('horas_teo_prac',$espacio->horasTeoPract);
-    $templateword->setValue('horas_asesorias',$espacio->horasAsesorias);
+    $templateword->setValue('horasTeoricas',$espacio->horasTeoricas);
+    $templateword->setValue('horasTeoPract',$espacio->horasTeoPract);
+    $templateword->setValue('horasAsesorias',$espacio->horasAsesorias);
     $templateword->setValue('habilitable',$espacio->habilitable);
     $templateword->setValue('validable',$espacio->validable);
     $templateword->setValue('homologable',$espacio->homologable);
@@ -45,8 +46,15 @@ public function descarga1($id){
     $templateword->setValue('contenidoActitudinal',$espacio->contenidoActitudinal);
     $templateword->setValue('metodologia',$espacio->metodologia);
     $templateword->setValue('evaluacion',$espacio->evaluacion);
-
+    $templateword->setValue('horasSemanales',$espacio->horasSemanales);
+    $templateword->setValue('competenciasPropias',$espacio->competenciasPropias);
+    $templateword->setValue('bibliografia',$espacio->bibliografia);
+    $templateword->setValue('historialRevision',$espacio->historialRevision);
+    $templateword->setValue('vigencia',$espacio->vigencia);
+    $templateword->setValue('responsables',$espacio->responsables);    
+    
     $templateword->saveAs("syllabus_".$espacio->nombre.".docx");
+
     return response()->download("syllabus_".$espacio->nombre.".docx")->deleteFileAfterSend(true);
 }
 

@@ -12,7 +12,6 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 {
     use Notifiable, HasRoleAndPermission;
 
-
     /**
      * The attributes that are mass assignable.
      *

@@ -69,4 +69,11 @@ class Academicspace extends Model
   {
       return $this->hasMany('App\Objectiveespace');
   }
+  /**
+  * Obtiene los requisitos del espacio academico
+  */
+  public function requirement()
+  {
+      return $this->hasMany('App\Requirement');
+  }
 }

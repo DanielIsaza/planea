@@ -34,7 +34,7 @@
 			  	<div class="col-md-3">
 		  			{{ Form::label('Horas semanales')}}
 					{{ Form::text('horasSemanales',null,['class' => 'form-control',
-							'placeholder'=>'Número de creditos']) }}
+							'placeholder'=>'Horas semanales']) }}
 		  		</div>
 		  		<div class="col-md-3">
 		  			{{ Form::label('Horas teóricas')}}
@@ -180,6 +180,46 @@
 					{{ Form::label('Unidades')}}
 					{{ Form::textarea('unidades',null,['class' => 'form-control',
 						'placeholder'=>'Unidades del espacio académico']) }}
+				</div>
+			</div>
+			<hr size="10" width="100%" />
+			<div class="row" style="margin:0px 10px 20px;">
+				<div class="col-md-13">
+					{{ Form::label('Bibliografía')}}
+					{{ Form::textarea('bibliografia',null,['class' => 'form-control',
+						'placeholder'=>'Bibliografía del espacio académico']) }}
+				</div>
+			</div>
+			<hr size="10" width="100%" />
+			<div class="row" style="margin:0px 10px 20px;">
+				<div class="col-md-13">
+					{{ Form::label('Recursos electrónicos')}}
+					{{ Form::textarea('recursosElectronicos',null,['class' => 'form-control',
+						'placeholder'=>'Recursos electrónicos del espacio académico']) }}
+				</div>
+			</div>
+			<hr size="10" width="100%" />
+			<div class="row" style="margin:0px 10px 20px;">
+				<div class="col-md-13">
+					{{ Form::label('Historial de revisión')}}
+					{{ Form::textarea('historialRevision',null,['class' => 'form-control',
+						'placeholder'=>'Historial de revisión del syllabus']) }}
+				</div>
+			</div>
+			<hr size="10" width="100%" />
+			<div class="row" style="margin:0px 10px 20px;">
+				<div class="col-md-13">
+					{{ Form::label('Vigencia')}}
+					{{ Form::textarea('vigencia',$espacio->vigencia,['class' => 'form-control',
+						'placeholder'=>'Vigencia del syllabus']) }}
+				</div>
+			</div>
+			<hr size="10" width="100%" />
+			<div class="row" style="margin:0px 10px 20px;">
+				<div class="col-md-13">
+					{{ Form::label('Responsables')}}
+					{{ Form::textarea('responsables',$espacio->responsables,['class' => 'form-control',
+						'placeholder'=>'Responsables del syllabus']) }}
 				</div>
 			</div>
     	{!! Form::close() !!}
