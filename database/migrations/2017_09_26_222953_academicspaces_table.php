@@ -37,7 +37,7 @@ class AcademicspacesTable extends Migration
         $table->string('contenidoProcedimental',700);
         $table->string('contenidoActitudinal',700);
         $table->string('procesosIntegrativos',700);
-        $table->string('unidades',9000);
+        $table->string('unidades',1000);
         $table->string('bibliografia',1000);
         $table->string('recursosElectronicos',1000);
         $table->string('historialRevision',1000);

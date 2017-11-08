@@ -19,37 +19,133 @@ class DatabaseSeeder extends Seeder
 
       DB::table('permissions')->insert([
         [
-          'name'=> 'universities.create',
-          'slug' => 'universities.create',
+          'name'=> 'usuario.create',
+          'slug' => 'usuario.create',
+          'description' => 'Crear usuario'
+        ],[
+          'name'=> 'usuario.update',
+          'slug' => 'usuario.update',
+          'description' => 'Actualizar usuario'
+        ],[
+          'name'=> 'usuario.delete',
+          'slug' => 'usuario.delete',
+          'description' => 'Eliminar usuario'
+        ],[
+          'name'=> 'usuario.read',
+          'slug' => 'usuario.read',
+          'description' => 'Ver usuario'
+        ],[
+          'name'=> 'roles.create',
+          'slug' => 'roles.create',
+          'description' => 'Crear roles'
+        ],[
+          'name'=> 'roles.update',
+          'slug' => 'roles.update',
+          'description' => 'Actualizar roles'
+        ],[
+          'name'=> 'roles.delete',
+          'slug' => 'roles.delete',
+          'description' => 'Eliminar roles'
+        ],[
+          'name'=> 'roles.read',
+          'slug' => 'roles.read',
+          'description' => 'Ver roles'
+        ],[
+          'name'=> 'universidades.create',
+          'slug' => 'universidades.create',
           'description' => 'Crear universidades'
         ],[
-          'name'=> 'universities.update',
-          'slug' => 'universities.update',
+          'name'=> 'universidades.update',
+          'slug' => 'universidades.update',
           'description' => 'Actualizar universidades'
         ],[
-          'name'=> 'universities.delete',
-          'slug' => 'universities.delete',
+          'name'=> 'universidades.delete',
+          'slug' => 'universidades.delete',
           'description' => 'Eliminar universidades'
         ],[
-          'name'=> 'universities.read',
-          'slug' => 'universities.read',
+          'name'=> 'universidades.read',
+          'slug' => 'universidades.read',
           'description' => 'Ver universidades'
         ],[
-          'name'=> 'faculties.create',
-          'slug' => 'faculties.create',
+          'name'=> 'facultades.create',
+          'slug' => 'facultades.create',
           'description' => 'Crear facultades'
         ],[
-          'name'=> 'faculties.update',
-          'slug' => 'faculties.update',
+          'name'=> 'facultades.update',
+          'slug' => 'facultades.update',
           'description' => 'Actualizar facultades'
         ],[
-          'name'=> 'faculties.delete',
-          'slug' => 'faculties.delete',
+          'name'=> 'facultades.delete',
+          'slug' => 'facultades.delete',
           'description' => 'Eliminar facultades'
         ],[
-          'name'=> 'faculties.read',
-          'slug' => 'faculties.read',
+          'name'=> 'facultades.read',
+          'slug' => 'facultades.read',
           'description' => 'Ver facultades'
+        ],[
+          'name'=> 'programas.create',
+          'slug' => 'programas.create',
+          'description' => 'Crear programas académicos'
+        ],[
+          'name'=> 'programas.update',
+          'slug' => 'programas.update',
+          'description' => 'Actualizar programas académicos'
+        ],[
+          'name'=> 'programas.delete',
+          'slug' => 'programas.delete',
+          'description' => 'Eliminar programas académicos'
+        ],[
+          'name'=> 'programas.read',
+          'slug' => 'programas.read',
+          'description' => 'Ver programas académicos'
+        ],[
+          'name'=> 'planes.create',
+          'slug' => 'planes.create',
+          'description' => 'Crear planes académicos'
+        ],[
+          'name'=> 'planes.update',
+          'slug' => 'planes.update',
+          'description' => 'Actualizar planes académicos'
+        ],[
+          'name'=> 'planes.delete',
+          'slug' => 'planes.delete',
+          'description' => 'Eliminar planes académicos'
+        ],[
+          'name'=> 'planes.read',
+          'slug' => 'planes.read',
+          'description' => 'Ver planes académicos'
+        ],[
+          'name'=> 'espacios.create',
+          'slug' => 'espacios.create',
+          'description' => 'Crear espacios académicos'
+        ],[
+          'name'=> 'espacios.update',
+          'slug' => 'espacios.update',
+          'description' => 'Actualizar espacios académicos'
+        ],[
+          'name'=> 'espacios.delete',
+          'slug' => 'espacios.delete',
+          'description' => 'Eliminar espacios académicos'
+        ],[
+          'name'=> 'espacios.read',
+          'slug' => 'espacios.read',
+          'description' => 'Ver espacios académicos'
+        ],[
+          'name'=> 'areas.create',
+          'slug' => 'areas.create',
+          'description' => 'Crear áreas de conocimiento'
+        ],[
+          'name'=> 'areas.update',
+          'slug' => 'areas.update',
+          'description' => 'Actualizar áreas de conocimiento'
+        ],[
+          'name'=> 'areas.delete',
+          'slug' => 'areas.delete',
+          'description' => 'Eliminar áreas de conocimiento'
+        ],[
+          'name'=> 'areas.read',
+          'slug' => 'areas.read',
+          'description' => 'Ver áreas de conocimiento'
         ],
       ]);
 
@@ -105,20 +201,37 @@ class DatabaseSeeder extends Seeder
       ]);
 
       DB::table('natures')->insert([
-        'nombre' => 'Esta es la naturaleza 1',
+        ['nombre' => 'Práctica'],
+        ['nombre' => 'Teórica'],
+        ['nombre' => 'Teórico-Práctica']
       ]);
 
       DB::table('typeevaluations')->insert([
-        'nombre'=>'Esta es la evaluacioin 1',
+        ['nombre' => 'Cuantitativa'],
+        ['nombre' => 'Cualitativa']
       ]);
 
       DB::table('knowledgeareas')->insert([
-        'nombre'=>'area de conocimiento 1',
-        'academicplan_id'=>1,
+        ['nombre'=>'Archivística',
+        'academicplan_id'=>1],
+        ['nombre'=>'Bibliotecología',
+        'academicplan_id'=>1],
+        ['nombre'=>'Investigación',
+        'academicplan_id'=>1],
+        ['nombre'=>'Lenguaje y Metodología',
+        'academicplan_id'=>1],
+        ['nombre'=>'Matemática y Estadística',
+        'academicplan_id'=>1],
+        ['nombre'=>'Sistemas',
+        'academicplan_id'=>1]
       ]);
 
       DB::table('activityacademics')->insert([
-        'nombre'=>'esta es una actividad acaddemica',
+        ['nombre'=>'Básica'],
+        ['nombre'=>'Profesional'],
+        ['nombre'=>'C. Facultad'],
+        ['nombre'=>'C. Personal'],
+        ['nombre'=>'C. Universidad']
       ]);
 
       DB::table('typeabilities')->insert([
