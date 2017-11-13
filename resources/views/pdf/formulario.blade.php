@@ -4,6 +4,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">Subir archivos</div>
     <div class="panel-body">
+      @permission('archivos.upload')
       {!!Form::open(['url'=> '/subir/','method' => 'POST','enctype'=>"multipart/form-data"]) !!}
         <div class="form-group">
           <label class="col-md-4 control-label">Seleccione el archivo a subir</label>
@@ -18,11 +19,13 @@
           </div>
         </div>
       {!! Form::close() !!}
+      @endpermission
     </div>
 </div>
 <div class="panel panel-default">
   <div class="panel-heading">Contenido pantalla principal</div>
     <div class="panel-body">
+      @permission('mensaje.update')
       {!!Form::open(['url'=> '/phome/','method' => 'POST']) !!}
         <div class="form-group">
           {{ Form::label('Contenido')}}
@@ -36,6 +39,7 @@
           </div>
         </div>
       {!! Form::close() !!}
+      @endpermission
     </div>
 </div>
 @endsection

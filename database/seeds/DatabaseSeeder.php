@@ -19,6 +19,34 @@ class DatabaseSeeder extends Seeder
 
       DB::table('permissions')->insert([
         [
+          'name'=> 'permisos.read',
+          'slug' => 'permisos.read',
+          'description' => 'Ver los permisos disponibles'
+        ],[
+          'name'=> 'mensaje.update',
+          'slug' => 'mensaje.update',
+          'description' => 'Modificar mensaje de bienvenida'
+        ],[
+          'name'=> 'archivos.upload',
+          'slug' => 'archivos.upload',
+          'description' => 'Subir archivos al servidor'
+        ],[
+          'name'=> 'tipohabilidad.read',
+          'slug' => 'tipohabilidad.read',
+          'description' => 'Crear tipo de habilidad'
+        ],[
+          'name'=> 'tipohabilidad.delete',
+          'slug' => 'tipohabilidad.delete',
+          'description' => 'Crear tipo de habilidad'
+        ],[
+          'name'=> 'tipohabilidad.update',
+          'slug' => 'tipohabilidad.update',
+          'description' => 'Crear tipo de habilidad'
+        ],[
+          'name'=> 'tipohabilidad.create',
+          'slug' => 'tipohabilidad.create',
+          'description' => 'Crear tipo de habilidad'
+        ],[
           'name'=> 'usuario.create',
           'slug' => 'usuario.create',
           'description' => 'Crear usuario'
