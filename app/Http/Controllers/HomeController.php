@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $fp = fopen("storage/home.txt", "r");
+        $linea = null;
+        while(!feof($fp)) {
+            $linea = $linea.' '.fgets($fp);
+        }
+        fclose($fp);
+        return view('/home',['contenido'=>$linea]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Ultraware\Roles\Models\Role;
+use App\Academicprogram;
 
 class UsersController extends Controller
 {
@@ -27,8 +28,11 @@ class UsersController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','id')->toArray();
+        $programas = Academicprogram::pluck('nombre','id')->toArray();
+        $programa = null;
         $usuario = new User;
-        return view("auth.create",["usuario"=>$usuario,"roles"=>$roles]);
+        $rol = null;
+        return view("auth.create",["usuario"=>$usuario,"roles"=>$roles,"programas"=>$programas,"programa"=>$programa,"rol"=>$rol]);
     }
 
     /**

@@ -29,4 +29,12 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Obtiene los permisos del programa academico
+     */
+    public function academicprograms()
+    {
+        return $this->hasMany('App\Programuser');
+    }
 }

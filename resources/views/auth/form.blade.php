@@ -20,7 +20,10 @@
             @endif
         </div>
         <div>
-        	{!! Field::select('roles',$roles,$rol) !!}
+        	{!! Field::select('rol',$roles,$rol) !!}
+        </div>
+        <div>
+        	{!! Field::select('academicprogram_id[]',$programas,$usuario->academicprogram) !!}
         </div>
 	</div>
 	<div class="form-group text-	">

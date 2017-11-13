@@ -23,8 +23,8 @@ class Academicprogram extends Model
     /**
      * Obtiene los permisos del programa academico
      */
-    public function autorize()
+    public function users()
     {
-        return $this->hasMany('App\Authorize');
+        return $this->hasMany('App\Programuser');
     }
 }

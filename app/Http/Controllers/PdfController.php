@@ -65,13 +65,18 @@ public function descarga1($id){
 }
 
   public function formulario(){
-    return view("pdf.formulario");
+    $fp = fopen("storage/home.txt", "r");
+        $linea = "";
+        while(!feof($fp)) {
+            $linea = $linea.' '.fgets($fp);
+        }
+    fclose($fp);
+    return view("pdf.formulario",["contenido"=>$linea]);
   }
 
   public function subir(Request $request){
     //obtenemos el campo file definido en el formulario
      $file = $request->file('file');
-
      //obtenemos el nombre del archivo
      $nombre = $file->getClientOriginalName();
 
@@ -81,5 +86,18 @@ public function descarga1($id){
 
       \Alert::message('Archivo subido correctamente', 'success');
           return view("pdf.formulario");
+  }
+  /**
+  * Metodo que permite almacenar la informacion que sera mostrada en home
+  *
+  */
+  public function home(Request $request){
+    $archivo = fopen("storage/home.txt", "w") or die("No se pudo abrir el archivo!");
+
+    fwrite($archivo, $request->contenido);
+    fclose($archivo);
+
+    \Alert::message('Información actualizada correctamente', 'success');
+    return redirect('/');
   }
 }

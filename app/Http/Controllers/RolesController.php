@@ -60,7 +60,6 @@ class RolesController extends Controller
         $rol->attachPermission($request->permisos[$i]);
       }
 
-      dd($rol);
       if($rol){
           \Alert::message('Rol creado correctamente', 'success');
           return redirect("/roles");

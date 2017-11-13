@@ -175,9 +175,9 @@ class DatabaseSeeder extends Seeder
           'slug' => 'actividadesacademicas.delete',
           'description' => 'Eliminar actividades académicas'
         ],[
-          'name'=> 'naturalezas.read',
-          'slug' => 'naturalezas.read',
-          'description' => 'Ver naturalezas de los espacios académicos'
+          'name'=> 'actividadesacademicas.read',
+          'slug' => 'actividadesacademicas.read',
+          'description' => 'Ver las actividades académicas'
         ],[
           'name'=> 'naturalezas.create',
           'slug' => 'naturalezas.create',
@@ -268,7 +268,7 @@ class DatabaseSeeder extends Seeder
           'description' => 'Crear asignarpesos'
         ],[
           'name'=> 'asignarpesos.update',
-          'slug' => 'habilidades.update',
+          'slug' => 'asignarpesos.update',
           'description' => 'Actualizar asignarpesos'
         ],[
           'name'=> 'asignarpesos.delete',

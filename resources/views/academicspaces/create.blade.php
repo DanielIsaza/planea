@@ -231,7 +231,8 @@
     	{!! Form::close() !!}
 @endsection
 @section("tabla")
-	<script> $(function() { $('textarea').froalaEditor() }); 
+	<script> 
+	$(function() { $('textarea').froalaEditor() }); 
 	$(".espacios").chosen({
 			placeholder_text_multiple: 'Seleccione los espacios académicos',
 			search_contains: true,

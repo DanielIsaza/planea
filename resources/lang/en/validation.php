@@ -119,6 +119,7 @@ return [
     'attributes' => [
       'faculty_id' => 'Facultad',
       'academicprogram_id' => 'Programa académico',
+      'academicprogram_id[]' => 'Programas académicos',
       'university_id' => 'Universidad',
       'state_id' => 'Estado',
       'academicplan_id' => 'Plan académico',
@@ -135,6 +136,8 @@ return [
       'knowledgearea_id'=>'Áreas de conocimiento',
       'user_id'=>'Usuario',
       'rol_id'=>'Rol',
+      'Requisitos[]'=>'Requisitos',
+      'Co-Requisitos[]'=>'Co-Requisitos',
     ],
 
 ];

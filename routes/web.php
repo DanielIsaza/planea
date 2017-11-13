@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'],function()
 	Route::get('formulario','PdfController@formulario');
 	//Ruta que permite subir un archivo 
 	Route::post('subir','PdfController@subir');
+	//Ruta que cambia lo que se muestra en el home
+	Route::post('phome','PdfController@home');
 	//Ruta que permite ver todos los permisos disponibles en el sistema
 	Route::get('permisos','RolesController@permisos');
 	//Ruta que retorna todas las facultades
@@ -195,11 +197,7 @@ Route::group(['middleware' => 'auth'],function()
 	Route::get('importarEspacios','AcademicspacesController@import');
 	//
 	Route::get('prueba',[function(){
-	if (file_exists("public/storage/book.csv")){
-	   echo "El archivo existe";
-	}else{
-	   echo "El archivo no existe";
-	}
+		
 		//$ac = array(App\knowledgearea::all());
 		/*$espacios = array(App\Academicspace::find(3));
 
