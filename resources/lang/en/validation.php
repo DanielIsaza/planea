@@ -138,6 +138,7 @@ return [
       'rol_id'=>'Rol',
       'Requisitos[]'=>'Requisitos',
       'Co-Requisitos[]'=>'Co-Requisitos',
+      'permisos[]' =>'Permisos',    
     ],
 
 ];

@@ -4,6 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Lista de áreas de conocimiento</div>
     <div class="panel-body">
+    	@permission('areas.read')
     	<div class="row">
 			<div class="col-md-6">{!! Field::select('university_id',$universidades,null) !!}</div>
 			<div class="col-md-6">{!! Field::select('faculty_id') !!}</div>
@@ -21,12 +22,15 @@
 				</tr>
 			</thead>
 		</table>
+		@endpermission
 	</div>
 </div>
 <div style="float:top; text-align:right;">
+	@permission('areas.create')
 	<a href="{{url('/areasconocimiento/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>
+	@endpermission
 </div>
 @endsection
 @section("tabla")
@@ -40,12 +44,16 @@
             rows += '<td>'+row.text+'</td>';
             rows += '<td> <div class"row">';
 			rows += '</div> <div class="col-xs-1">';
-			rows += "<a href='{{ URL::asset('areasconocimiento') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i></a>";
-			rows += '</div> <div class="col-xs-1">';
+			rows += "@permission('areas.update')";
+			rows += "<a href='{{ URL::asset('areasconocimiento') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i></a></div>";
+			rows += "@endpermission";
+			rows += ' <div class="col-xs-1">';
+			rows += "@permission('areas.delete')";
             rows += "<form action='{{ URL::asset('areasconocimiento') }}/"+row.value+"' method='POST' class='inline-block'>"+
-            		"<input name='_method' type='hidden' value='DELETE'>"+
-                    "<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+
-                    "<button type='submit' class='btn btn-link red-text no-padding no-margin no-transform'><i class='material-icons'>delete_sweep</i></button>"+"</form>";
+            	"<input name='_method' type='hidden' value='DELETE'>"+
+                "<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+
+                "<button type='submit' class='btn btn-link red-text no-padding no-margin no-transform'><i class='material-icons'>delete_sweep</i></button>"+"</form>";
+			rows += "@endpermission";
 			rows += '</div></div></td></tr>';
 		});
         rows += '</tbody>';

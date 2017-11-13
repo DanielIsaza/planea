@@ -137,10 +137,6 @@ return [
                     'url'  => '/semestres',
                 ],
                 [
-                    'text' => 'Estados',
-                    'url'  => '/estados',
-                ],
-                [
                     'text' => 'Planes académicos',
                     'url'  => '/planesacademicos',
                 ],
@@ -156,11 +152,11 @@ return [
                     'url'  => '/naturaleza',
                 ],
                 [
-                    'text' => 'Metodologías',
+                    'text' => 'Tipos de Metodologías',
                     'url'  => '/tiposmetodologias',
                 ],
                 [
-                    'text' => 'Evaluación',
+                    'text' => 'Tipos de Evaluación',
                     'url'  => '/tiposevaluaciones',
                 ],
                 [
@@ -183,7 +179,7 @@ return [
           'icon'    => 'file',
           'submenu' => [
               [
-                  'text' => 'Tipos habilidad',
+                  'text' => 'Tipos de habilidad',
                   'url'  => '/tiposhabilidad',
               ],
               [

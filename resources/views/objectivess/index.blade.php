@@ -4,7 +4,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Lista de peso espacio - objetivo</div>
     <div class="panel-body">
-
+    	@permission('asignarpesos.read')
 		{!! Form::model(['method'=>'POST','class'=>'form']) !!}
 
 			<div class="row">
@@ -32,12 +32,15 @@
 				<tbody>
 				</tbody>
 			</table>
+		@endpermission
 	</div>
 </div>
 <div style="float:top; text-align:right;">
-<a href="{{url('/asignacion/create')}}" class="btn btn-primary btn-fab">
-	<i class="glyphicon glyphicon-plus"></i>
-</a>
+	@permission('asignarpesos.create')
+	<a href="{{url('/asignacion/create')}}" class="btn btn-primary btn-fab">
+		<i class="glyphicon glyphicon-plus"></i>
+	</a>
+	@endpermission
 </div>
 @endsection
 @section('tabla')
@@ -53,12 +56,16 @@
                     rows += '<td>'+row.peso+'</td>';
                     rows += '<td>'+row.pesohabilidad+'</td>'
                     rows += '<td> <div class="row"> <div class="col-xs-1">';
-					rows += "<a href='{{ URL::asset('asignacion') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i> </a>";
-					rows += '</div> <div class="col-xs-6">';
+                    rows += "@permission('asignarpesos.update')";
+					rows += "<a href='{{ URL::asset('asignacion') }}/"+row.value+"/edit'><i class='material-icons'>mode_edit</i> </a></div> ";
+                    rows += "@endpermission";	
+					rows += '<div class="col-xs-6">';
+                    rows += "@permission('asignarpesos.delete')";
                     rows += "<form action='{{ URL::asset('asignacion') }}/"+row.value+"' method='POST' class='inline-block'>"+
                     	"<input name='_method' type='hidden' value='DELETE'>"+
                     	"<input name='_token' type='hidden' value='{{ csrf_token() }}'>"+
                     	"<button type='submit' class='btn btn-link red-text no-padding no-margin no-transform'><i class='material-icons'>delete_sweep</i></button>"+"</form>";
+                    rows += "@endpermission";
                     rows += '</div></div></td></tr>';
                 });
                 rows += '</tbody>';

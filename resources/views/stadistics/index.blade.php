@@ -4,6 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Estadística por plan de estudios</div>
     <div class="panel-body">
+        @permission('estadisticas.read')
         <div class="row">
             <div class="col-md-3">{!! Field::select('university_id',$universidades) !!}</div>
             <div class="col-md-3">{!! Field::select('faculty_id') !!}</div>
@@ -12,6 +13,7 @@
         </div>
 
     	<div id="grafica"></div>
+        @endpermission
     </div>
 </div>
 @endsection
