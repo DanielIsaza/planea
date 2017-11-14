@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Ultraware\Roles\Models\Role;
 use App\Academicprogram;
+use App\Programuser;
 
 class UsersController extends Controller
 {
@@ -49,7 +50,14 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $usuario->attachRole($request->roles);
+        $usuario->attachRole($request->rol);
+
+        for ($i=0; $i < sizeof($request->academicprogram_id) ; $i++) { 
+            Programuser::create([
+                'academicprogram_id' => $request->academicprogram_id[$i],
+                'user_id' => $usuario->id,
+            ]);
+        }
 
         if($usuario){
           \Alert::message('Usuario registrado correctamente', 'success');
@@ -81,7 +89,13 @@ class UsersController extends Controller
     {
         $usuario = User::find($id);
         $roles = Role::pluck('name','id')->toArray();
-        return view("auth.edit",["usuario"=>$usuario,"roles"=>$roles,"rol"=>$usuario->roles[0]->id]);
+        $programas = Academicprogram::pluck('nombre','id')->toArray();
+        $programasasignados = array();
+        for ($i=0; $i < sizeof($usuario->academicprograms); $i++) { 
+            array_push($programasasignados,$usuario->academicprograms[$i]->academicprogram_id);
+        }
+
+        return view("auth.edit",["usuario"=>$usuario,"roles"=>$roles,"rol"=>$usuario->roles[0]->id,"programas"=>$programas,"programasasignados"=>$programasasignados]);
     }
 
     /**
@@ -96,8 +110,21 @@ class UsersController extends Controller
         $usuario = User::find($id);
         $usuario->name = $request->nombre;
         $usuario->email = $request->correo;
+
         if($request->password != null){
             $usuario->password = bcrypt($request->password);
+        }
+
+        Programuser::where('user_id','=',$usuario->user_id)->delete();
+
+        $usuario->detachAllRoles(); 
+        $usuario->attachRole($request->rol);
+
+        for ($i=0; $i < sizeof($request->academicprogram_id) ; $i++) { 
+            Programuser::create([
+                'academicprogram_id' => $request->academicprogram_id[$i],
+                'user_id' => $usuario->id,
+            ]);
         }
 
         if($usuario->save()){

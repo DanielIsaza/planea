@@ -91,6 +91,7 @@ class RolesController extends Controller
       $rol = Role::find($id);
       $permisos = Permission::pluck('name','id')->toArray();
       $permiso = array();
+      
       for($i = 0; $i < sizeof($rol->permissions); $i++){
          array_push($permiso, $rol->permissions[$i]->id);
       } 

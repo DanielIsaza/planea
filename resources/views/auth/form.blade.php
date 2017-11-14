@@ -23,7 +23,7 @@
         	{!! Field::select('rol',$roles,$rol) !!}
         </div>
         <div>
-        	{!! Field::select('academicprogram_id[]',$programas,$usuario->academicprogram) !!}
+        	{!! Field::select('academicprogram_id[]',$programas,$programasasignados,['class'=>'form-control programas','multiple'=>true]) !!}
         </div>
 	</div>
 	<div class="form-group text-	">
@@ -31,3 +31,12 @@
 		<input type="submit" value="Guardar" class="btn btn-success">
 	</div>
 {!! Form::close() !!}
+@section('tabla')
+	<script type="text/javascript">
+		$(".programas").chosen({
+			placeholder_text_multiple: 'Seleccione los programas del usuario',
+			search_contains: true,
+			no_results_text: 'No hay programas académicos con ese nombre'
+		});
+	</script>
+@endsection

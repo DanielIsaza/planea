@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Academicprogram extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+    ];
   /**
 	* Obtiene la facultad del programa
 	*/
