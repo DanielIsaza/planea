@@ -1,1 +1,1 @@
-<p><strong><span style="font-size: 24px;">Bienvenido!</span></strong></p>
+<h1>Bienvenido !</h1>
