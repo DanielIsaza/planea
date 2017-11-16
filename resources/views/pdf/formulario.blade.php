@@ -43,15 +43,3 @@
     </div>
 </div>
 @endsection
-@section("tabla")
-  <script> 
-  //  $(function() { $('textarea').froalaEditor() }); 
-  tinymce.init({ 
-    selector:'textarea',
-    plugins: "lists table link directionality textcolor colorpicker textpattern",
-    toolbar: "undo redo styleselect bold italic alignleft aligncenter alignright alignjustify numlist bullist table link directionality forecolor backcolor ",
-    menu: {}
-
-     });
-  </script>
-@endsection 
