@@ -30,10 +30,10 @@ class UsersController extends Controller
     {
         $roles = Role::pluck('name','id')->toArray();
         $programas = Academicprogram::pluck('nombre','id')->toArray();
-        $programa = null;
+        $programasasignados = null;
         $usuario = new User;
         $rol = null;
-        return view("auth.create",["usuario"=>$usuario,"roles"=>$roles,"programas"=>$programas,"programa"=>$programa,"rol"=>$rol]);
+        return view("auth.create",["usuario"=>$usuario,"roles"=>$roles,"programas"=>$programas,"programasasignados"=>$programasasignados,"rol"=>$rol]);
     }
 
     /**

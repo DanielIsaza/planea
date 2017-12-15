@@ -20,12 +20,12 @@ class RequirementsTable extends Migration
           //Espacio academico que define el corequisito o prerequisito
           $table->integer('academicspace_id')->unsigned();
           // 1 para prerequisito 2 para corequisito
-          $table->integer('tipo');
+          $table->integer('tipo')->default(1);
 
           $table->timestamps();
 
-          $table->foreign('academicspaceD_id')->references('id')->on('academicspaces');
-          $table->foreign('academicspace_id')->references('id')->on('academicspaces');
+          $table->foreign('academicspaceD_id')->references('id')->on('academicspaces')->onDelete('cascade');
+          $table->foreign('academicspace_id')->references('id')->on('academicspaces')->onDelete('cascade');
       });
     }
 

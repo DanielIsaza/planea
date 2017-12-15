@@ -85,7 +85,13 @@ public function descarga1($id){
      //\Storage::move($nombre,$nombre);
 
       \Alert::message('Archivo subido correctamente', 'success');
-          return view("pdf.formulario");
+      $fp = fopen("storage/home.txt", "r");
+        $linea = "";
+        while(!feof($fp)) {
+            $linea = $linea.' '.fgets($fp);
+        }
+     fclose($fp);
+      return view("pdf.formulario",["contenido"=>$linea]);
   }
   /**
   * Metodo que permite almacenar la informacion que sera mostrada en home

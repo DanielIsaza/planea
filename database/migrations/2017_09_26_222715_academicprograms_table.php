@@ -19,7 +19,7 @@ class AcademicprogramsTable extends Migration
         $table->integer('faculty_id')->unsigned();
         $table->timestamps();
 
-        $table->foreign('faculty_id')->references('id')->on('faculties');
+        $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
     });
     }
 

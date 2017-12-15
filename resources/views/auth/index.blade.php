@@ -30,7 +30,7 @@
 								</div>
 								<div class="col-xs-6">
 									@permission('usuario.delete')
-									@include('Auth.delete',['usuario'=>$usuario])
+									@include('auth.delete',['usuario'=>$usuario])
 									@endpermission
 								</div>
 							</div>

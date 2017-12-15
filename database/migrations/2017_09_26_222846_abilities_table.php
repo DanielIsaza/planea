@@ -22,8 +22,8 @@ class AbilitiesTable extends Migration
 
         $table->timestamps();
 
-        $table->foreign('typeability_id')->references('id')->on('typeabilities');
-        $table->foreign('academicplan_id')->references('id')->on('academicplans');
+        $table->foreign('typeability_id')->references('id')->on('typeabilities')->onDelete('cascade');
+        $table->foreign('academicplan_id')->references('id')->on('academicplans')->onDelete('cascade');
     });
     }
 

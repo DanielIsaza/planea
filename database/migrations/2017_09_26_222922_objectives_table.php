@@ -16,12 +16,12 @@ class ObjectivesTable extends Migration
       Schema::create('objectives', function (Blueprint $table) {
         $table->increments('id');
         $table->string('nombre');
-        $table->string('descripcion');
+        $table->string('descripcion')->nullable();
         $table->integer('peso')->unsigned();
         $table->integer('ability_id')->unsigned();
         $table->timestamps();
 
-        $table->foreign('ability_id')->references('id')->on('abilities');
+        $table->foreign('ability_id')->references('id')->on('abilities')->onDelete('cascade');
     });
     }
 

@@ -20,8 +20,8 @@ class ObjectiveespacesTable extends Migration
         $table->integer('peso')->unsigned();
         $table->timestamps();
 
-        $table->foreign('academicspace_id')->references('id')->on('academicspaces');
-        $table->foreign('objective_id')->references('id')->on('objectives');
+        $table->foreign('academicspace_id')->references('id')->on('academicspaces')->onDelete('cascade');
+        $table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
     });
     }
 

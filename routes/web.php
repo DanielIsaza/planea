@@ -118,7 +118,7 @@ Route::group(['middleware' => 'auth'],function()
 	}]);
 	//Ruta que obtiene las areas de conocimiento de un plan
 	Route::get('area/{academicplan_id?}',["as"=>"area",function($academicplan_id){
-		return App\knowledgearea::where('academicplan_id',$academicplan_id)->select('id as value','nombre as text')->get();
+		return App\Knowledgearea::where('academicplan_id',$academicplan_id)->select('id as value','nombre as text')->get();
 	}]);
 	//Ruta que obtiene los espacios académicos y objetivos que son afectados por cada uno
 	Route::get('objetivosreal/{ability_id?}',["as"=>"objetivosreal",function($ability_id){

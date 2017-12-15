@@ -19,7 +19,7 @@ class FacultiesTable extends Migration
         $table->integer('university_id')->unsigned();
         $table->timestamps();
 
-        $table->foreign('university_id')->references('id')->on('universities');
+        $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade');
     });
     }
 

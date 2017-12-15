@@ -21,7 +21,7 @@ class AcademicplansTable extends Migration
           $table->integer('state_id')->unsigned();
           $table->timestamps();
 
-          $table->foreign('academicprogram_id')->references('id')->on('academicprograms');
+          $table->foreign('academicprogram_id')->references('id')->on('academicprograms')->onDelete('cascade');
           $table->foreign('state_id')->references('id')->on('states');
       });
 
@@ -31,7 +31,7 @@ class AcademicplansTable extends Migration
           $table->integer('academicplan_id')->unsigned();
           $table->timestamps();
 
-          $table->foreign('academicplan_id')->references('id')->on('academicplans');
+          $table->foreign('academicplan_id')->references('id')->on('academicplans')->onDelete('cascade');
       });
     }
 

@@ -104,7 +104,7 @@ class AcademicspacesController extends Controller
                 'academicspace_id' => $request->requisitos[$i],
                 'tipo' => 1
               ]);
-          }
+      }
 
           \Alert::message('Espacio académico creado correctamente', 'success');
           return redirect("/espaciosacademicos");
@@ -242,9 +242,8 @@ class AcademicspacesController extends Controller
    */
   public function destroy($id)
   {
-      $objetivos = Academicspace::find($id)->objective;
-      if(count($objetivos) == 0){
-          Academicspace::destroy($id);
+      if(Academicspace::destroy($id)){
+          
           \Alert::message('Espacio académico eliminado correctamente', 'success');
           return redirect('/espaciosacademicos');
       }else{
@@ -276,11 +275,17 @@ class AcademicspacesController extends Controller
           $espacio->metodologia = $book->metodologia;
           $espacio->evaluacion = $book->evaluacion;
           $espacio->descripcion = $book->descripcion;
+          $espacio->competenciasPropias = $book->competenciasPropias;
           $espacio->contenidoConceptual = $book->contenidoconceptual;
           $espacio->contenidoProcedimental = $book->contenidoprocedimental;
           $espacio->contenidoActitudinal = $book->contenidoactitudinal;
           $espacio->procesosIntegrativos = $book->procesosintegrativos;
           $espacio->unidades = $book->unidades;
+          $espacio->bibliografia = $book->bibliografia;
+          $espacio->recursosElectronicos = $book->recursosElectronicos;
+          $espacio->vigencia = $book->vigencia;
+          $espacio->historialRevision  = $book->historialRevision;
+
           $espacio->semester_id = $book->semester_id;
           $espacio->academicplan_id = $book->academicplan_id;
           $espacio->activityacademic_id = $book->activityacademic_id;
@@ -288,15 +293,41 @@ class AcademicspacesController extends Controller
           $espacio->typemethodology_id = $book->typemethodology_id;
           $espacio->nature_id = $book->nature_id;
           $espacio->knowledgearea_id = $book->knowledgearea_id;
-          /*$espacio->requisitos = explode(",",$book->requisitos);
-          $espacio->corequisitos = explode(",",$book->corequisitos);
-          dd($espacio);
-          */
-          $espacio->save();
-        }
-      });
+          
+          $requisitos = explode(",",$book->requisitos);
+          $corequisitos = explode(",",$book->corequisitos);
 
-      \Alert::message('planes académicos importados exitosamente', 'success');
+          if($espacio->save()){
+            if(sizeof($requisitos) > 0){
+              for ($i=0; $i < sizeof($requisitos); $i++) { 
+                  Requirement::create([
+                    'academicspaceD_id' => $espacio->id,
+                    'academicspace_id' => $requisitos[$i],
+                    'tipo' => 1
+                  ]);
+               }
+            }
+
+            if(sizeof($corequisitos) > 0){
+             for ($i=0; $i < sizeof($corequisitos); $i++) { 
+                Requirement::create([
+                  'academicspaceD_id' => $espacio->id,
+                  'academicspace_id' => $requisitos[$i],
+                  'tipo' => 2
+                ]);
+             }
+            }
+
+            $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
+            fwrite($archivo, "El espacio academico ".$espacio->nombre. " fue importado correctamente\r\n");
+            fclose($archivo);
+            
+          }else
+            \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
+          }
+      });
+      
+      \Alert::message('Espacios académicos importados exitosamente', 'success');
       return redirect('/espaciosacademicos');
     }else{
       \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
