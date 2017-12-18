@@ -34,7 +34,8 @@ public function descarga1($id){
     $templateword->setValue('nucleoTematico',$espacio->nucleoTematico);
     $templateword->setValue('numeroCreditos',$espacio->numeroCreditos);
     $templateword->setValue('tipo_evaluacion',$espacio->typeevaluation->nombre);
-    $templateword->setValue('horasTeoricas',$espacio->horasTeoricas);
+    $templateword->setValue('horasIndependiente',$espacio->horasIndependiente);
+    $templateword->setValue('horasPracticas',$espacio->horasPracticas);
     $templateword->setValue('horasTeoPract',$espacio->horasTeoPract);
     $templateword->setValue('horasAsesorias',$espacio->horasAsesorias);
     $templateword->setValue('habilitable',$espacio->habilitable);
@@ -51,7 +52,14 @@ public function descarga1($id){
     $templateword->setValue('bibliografia',$espacio->bibliografia);
     $templateword->setValue('historialRevision',$espacio->historialRevision);
     $templateword->setValue('vigencia',$espacio->vigencia);
-    $templateword->setValue('responsables',$espacio->responsables);    
+    $templateword->setValue('responsables',$espacio->responsables);
+    $templateword->setValue('unidades',$espacio->unidades); 
+    $templateword->setValue('recusosElectronicos',$espacio->recusosElectronicos);
+    $templateword->setValue('planAcademico',$espacio->academicplan->nombre);      
+    $templateword->setValue('actividadAcademica',$espacio->activityacademic->nombre);
+    $templateword->setValue('tipoEvaluacion',$espacio->typeevaluation->nombre);
+    $templateword->setValue('tipoMetodologia',$espacio->typemethodology->nombre);
+    $templateword->setValue('areaConocimiento',$espacio->knowledgearea->nombre);
     $requisitos = "";
 
     for ($i=0; $i < sizeof($espacio->requirement); $i++) { 
