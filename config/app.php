@@ -185,6 +185,11 @@ return [
          * Third Party Service Providers...
          */
         Ultraware\Roles\RolesServiceProvider::class,
+        /**
+        * Gestor de archivos
+        */
+        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -238,6 +243,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

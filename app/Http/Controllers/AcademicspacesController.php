@@ -255,7 +255,7 @@ class AcademicspacesController extends Controller
    * permite crear los espacios a partir de un archivo excel
    */
   public function import(){
-    if(\Storage::disk('local')->exists('/public/espacios.xlsx')){
+    if(!\Storage::disk('local')->exists('public/storage/espacios.xlsx')){
       Excel::load('public/storage/espacios.xlsx', function($reader) {
         foreach ($reader->get() as $book) {
           $espacio = new Academicspace();
@@ -328,7 +328,9 @@ class AcademicspacesController extends Controller
       });
       
       \Alert::message('Espacios académicos importados exitosamente', 'success');
-      return redirect('/espaciosacademicos');
+      return response()->download("storage/importar_espacios_academicos_log.txt")->deleteFileAfterSend(true)->reload();
+      return ;
+      ;
     }else{
       \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
       return redirect('/espaciosacademicos');

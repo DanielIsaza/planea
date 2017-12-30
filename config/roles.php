@@ -40,8 +40,8 @@ return [
     */
 
     'models' => [
-        'role' => Bican\Roles\Models\Role::class,
-        'permission' => Bican\Roles\Models\Permission::class,
+        'role' => Ultraware\Roles\Models\Role::class,
+        'permission' => Ultraware\Roles\Models\Permission::class,
     ],
 
     /*
