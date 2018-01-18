@@ -299,10 +299,11 @@ class AcademicspacesController extends Controller
 
           if($espacio->save()){
             if(sizeof($requisitos) > 0){
-              for ($i=0; $i < sizeof($requisitos); $i++) { 
+              for ($i=0; $i < sizeof($requisitos); $i++) {
+                  $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first(); 
                   Requirement::create([
                     'academicspaceD_id' => $espacio->id,
-                    'academicspace_id' => $requisitos[$i],
+                    'academicspace_id' => $codigo,
                     'tipo' => 1
                   ]);
                }
@@ -310,6 +311,7 @@ class AcademicspacesController extends Controller
 
             if(sizeof($corequisitos) > 0){
              for ($i=0; $i < sizeof($corequisitos); $i++) { 
+                  $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first(); 
                 Requirement::create([
                   'academicspaceD_id' => $espacio->id,
                   'academicspace_id' => $requisitos[$i],

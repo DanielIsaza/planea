@@ -32,16 +32,16 @@ class AcademicspacesTable extends Migration
         $table->string('metodologia',700)->default('por diligenciar')->nullable();
         $table->string('evaluacion',700)->default('por diligenciar')->nullable();
         $table->string('descripcion',700)->default('por diligenciar')->nullable();
-        $table->string('competenciasPropias',700)->default('por diligenciar')->nullable();
-        $table->string('contenidoConceptual',700)->default('por diligenciar')->nullable();
-        $table->string('contenidoProcedimental',700)->default('por diligenciar')->nullable();
-        $table->string('contenidoActitudinal',700)->default('por diligenciar')->nullable();
-        $table->string('procesosIntegrativos',700)->default('por diligenciar')->nullable();
-        $table->string('unidades',1000)->default('por diligenciar')->nullable();
-        $table->string('bibliografia',1000)->default('por diligenciar')->nullable();
-        $table->string('recursosElectronicos',1000)->default('por diligenciar')->nullable();
-        $table->string('historialRevision',1000)->default('por diligenciar')->nullable();
-        $table->string('vigencia',200)->default('por diligenciar')->nullable();
+        $table->string('competenciasPropias',2000)->default('por diligenciar')->nullable();
+        $table->string('contenidoConceptual',2000)->default('por diligenciar')->nullable();
+        $table->string('contenidoProcedimental',2000)->default('por diligenciar')->nullable();
+        $table->string('contenidoActitudinal',2000)->default('por diligenciar')->nullable();
+        $table->string('procesosIntegrativos',2000)->default('por diligenciar')->nullable();
+        $table->string('unidades',3000)->default('por diligenciar')->nullable();
+        $table->string('bibliografia',3000)->default('por diligenciar')->nullable();
+        $table->string('recursosElectronicos',3000)->default('por diligenciar')->nullable();
+        $table->string('historialRevision',3000)->default('por diligenciar')->nullable();
+        $table->string('vigencia',100)->default('por diligenciar')->nullable();
         $table->string('responsables',100)->default('por diligenciar')->nullable();
 
         $table->integer('semester_id')->unsigned()->default(1)->nullable();
