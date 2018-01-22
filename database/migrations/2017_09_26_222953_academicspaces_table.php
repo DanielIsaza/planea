@@ -32,15 +32,15 @@ class AcademicspacesTable extends Migration
         $table->string('metodologia',700)->default('por diligenciar')->nullable();
         $table->string('evaluacion',700)->default('por diligenciar')->nullable();
         $table->string('descripcion',700)->default('por diligenciar')->nullable();
-        $table->string('competenciasPropias',2000)->default('por diligenciar')->nullable();
-        $table->string('contenidoConceptual',2000)->default('por diligenciar')->nullable();
-        $table->string('contenidoProcedimental',2000)->default('por diligenciar')->nullable();
-        $table->string('contenidoActitudinal',2000)->default('por diligenciar')->nullable();
-        $table->string('procesosIntegrativos',2000)->default('por diligenciar')->nullable();
-        $table->string('unidades',3000)->default('por diligenciar')->nullable();
-        $table->string('bibliografia',3000)->default('por diligenciar')->nullable();
-        $table->string('recursosElectronicos',3000)->default('por diligenciar')->nullable();
-        $table->string('historialRevision',3000)->default('por diligenciar')->nullable();
+        $table->string('competenciasPropias')->default('por diligenciar')->nullable();
+        $table->string('contenidoConceptual')->default('por diligenciar')->nullable();
+        $table->string('contenidoProcedimental')->default('por diligenciar')->nullable();
+        $table->string('contenidoActitudinal')->default('por diligenciar')->nullable();
+        $table->string('procesosIntegrativos')->default('por diligenciar')->nullable();
+        $table->string('unidades')->default('por diligenciar')->nullable();
+        $table->string('bibliografia')->default('por diligenciar')->nullable();
+        $table->string('recursosElectronicos')->default('por diligenciar')->nullable();
+        $table->string('historialRevision')->default('por diligenciar')->nullable();
         $table->string('vigencia',100)->default('por diligenciar')->nullable();
         $table->string('responsables',100)->default('por diligenciar')->nullable();
 

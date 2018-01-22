@@ -17,6 +17,7 @@ use App\Semester;
 use App\Knowledgearea;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Requirement;
+use Exception;
 
 class AcademicspacesController extends Controller
 {
@@ -255,6 +256,8 @@ class AcademicspacesController extends Controller
    * permite crear los espacios a partir de un archivo excel
    */
   public function import(){
+    try{
+
     if(!\Storage::disk('local')->exists('public/storage/espacios.xlsx')){
       Excel::load('public/storage/espacios.xlsx', function($reader) {
         foreach ($reader->get() as $book) {
@@ -331,14 +334,16 @@ class AcademicspacesController extends Controller
       
       \Alert::message('Espacios académicos importados exitosamente', 'success');
       return response()->download("storage/importar_espacios_academicos_log.txt")->deleteFileAfterSend(true)->reload();
-      return ;
-      ;
+      
     }else{
       \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
       return redirect('/espaciosacademicos');
     }
   }
-  /**
-  *w
-  */
+  catch(Exception $e){
+    \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+    return redirect('/espaciosacademicos');
+  }
+  }
+  
 }

@@ -195,6 +195,10 @@ Route::group(['middleware' => 'auth'],function()
 	Route::get('importarPlanes','AcademicplansController@import');
 	//Ruta para importar los planes academicos desde un archivo 
 	Route::get('importarEspacios','AcademicspacesController@import');
+	//Ruta que permite descargar el log de importe de los espacios academicos
+	Route::get('descargalogespacios',[function(){
+		
+	}])
 	//
 	Route::get('prueba',[function(){
 		

@@ -30,6 +30,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('espacios.create')
+	<a href="{{url('/descargalogespacios')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/importarEspacios')}}" class="btn btn-success btn-fab">
 		Cargar desde archivo
 	</a>
