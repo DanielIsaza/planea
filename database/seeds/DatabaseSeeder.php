@@ -432,10 +432,12 @@ class DatabaseSeeder extends Seeder
       ]]);
 
       DB::table('typemethodologies')->insert([
-        'nombre'=>'Esta es la metodologia 1',
+        'nombre'=>'Presencial',
+        'nombre'=>'Virtual',
+        'nombre'=>'Distancia'
       ]);
 
-      DB::table('academicspaces')->insert([[
+     /* DB::table('academicspaces')->insert([[
         'codigo'=>'1234',
         'nombre'=>'materia 1',
         'numeroCreditos'=>'2',
@@ -527,6 +529,6 @@ class DatabaseSeeder extends Seeder
           'objective_id'=>4,
           'peso'=>2
         ]
-    ]);
+    ]);*/
     }
 }

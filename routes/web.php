@@ -201,7 +201,6 @@ Route::group(['middleware' => 'auth'],function()
 	}]);
 	//
 	Route::get('prueba',[function(){
-		
 		//$ac = array(App\knowledgearea::all());
 		/*$espacios = array(App\Academicspace::find(3));
 

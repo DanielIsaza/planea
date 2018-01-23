@@ -256,102 +256,111 @@ class AcademicspacesController extends Controller
    * permite crear los espacios a partir de un archivo excel
    */
   public function import(){
-    try{
+    try
+    {
+
        $archivo = fopen("storage/importar_espacios_academicos_log.txt", "w");
-            fclose($archivo);
-    if(!\Storage::disk('local')->exists('public/storage/espacios.xlsx')){
-      Excel::load('public/storage/espacios.xlsx', function($reader) {
-       
-        foreach ($reader->get() as $book) {
-          $espacio = new Academicspace();
-          $espacio->codigo = $book->codigo;
-          $espacio->nombre = $book->nombre;
-          $espacio->numeroCreditos = $book->numerocreditos;
-          $espacio->horasTeoricas = $book->horasteoricas;
-          $espacio->horasPracticas = $book->horaspracticas;
-          $espacio->horasTeoPract = $book->horasteopract;
-          $espacio->horasAsesorias = $book->horasasesoria;
-          $espacio->horasIndependiente = $book->horasindependiente;
-          $espacio->habilitable = $book->habilitable;
-          $espacio->validable = $book->validable;
-          $espacio->homologable = $book->homologable;
-          $espacio->nucleoTematico = $book->nucleotematico;
-          $espacio->justificacion = $book->justificacion;
-          $espacio->metodologia = $book->metodologia;
-          $espacio->evaluacion = $book->evaluacion;
-          $espacio->descripcion = $book->descripcion;
-          $espacio->competenciasPropias = $book->competenciasPropias;
-          $espacio->contenidoConceptual = $book->contenidoconceptual;
-          $espacio->contenidoProcedimental = $book->contenidoprocedimental;
-          $espacio->contenidoActitudinal = $book->contenidoactitudinal;
-          $espacio->procesosIntegrativos = $book->procesosintegrativos;
-          $espacio->unidades = $book->unidades;
-          $espacio->bibliografia = $book->bibliografia;
-          $espacio->recursosElectronicos = $book->recursosElectronicos;
-          $espacio->vigencia = $book->vigencia;
-          $espacio->historialRevision  = $book->historialRevision;
+        fclose($archivo);
 
-          $espacio->semester_id = $book->semester_id;
-          $espacio->academicplan_id = $book->academicplan_id;
-          $espacio->activityacademic_id = $book->activityacademic_id;
-          $espacio->typeevaluation_id = $book->typeevaluation_id;
-          $espacio->typemethodology_id = $book->typemethodology_id;
-          $espacio->nature_id = $book->nature_id;
-          $espacio->knowledgearea_id = $book->knowledgearea_id;
-          
-          $requisitos = explode(",",$book->requisitos);
-          $corequisitos = explode(",",$book->corequisitos);
+      if(!\Storage::disk('local')->exists('public/storage/espacios.xlsx')){
+      
+        Excel::load('public/storage/espacios.xlsx', function($reader) { 
 
-          if($espacio->save()){
-            if(sizeof($requisitos) > 0){
-              for ($i=0; $i < sizeof($requisitos); $i++) {
-                  $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first(); 
-                  Requirement::create([
-                    'academicspaceD_id' => $espacio->id,
-                    'academicspace_id' => $codigo,
-                    'tipo' => 1
-                  ]);
-               }
-            }
+          foreach ($reader->get() as $book) {
+            if(sizeof(Academicspace::where('codigo',$book->codigo)->get()) == 0 ){
 
-            if(sizeof($corequisitos) > 0){
-             for ($i=0; $i < sizeof($corequisitos); $i++) { 
-                  $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first(); 
-                Requirement::create([
-                  'academicspaceD_id' => $espacio->id,
-                  'academicspace_id' => $requisitos[$i],
-                  'tipo' => 2
-                ]);
-             }
-            }
+            $espacio = new Academicspace();
+            $espacio->codigo = $book->codigo;
+            $espacio->nombre = $book->nombre;
+            $espacio->numeroCreditos = $book->numerocreditos;
+            $espacio->horasTeoricas = $book->horasteoricas;
+            $espacio->horasPracticas = $book->horaspracticas;
+            $espacio->horasTeoPract = $book->horasteopract;
+            $espacio->horasAsesorias = $book->horasasesoria;
+            $espacio->horasIndependiente = $book->horasindependiente;
+            $espacio->habilitable = $book->habilitable;
+            $espacio->validable = $book->validable;
+            $espacio->homologable = $book->homologable;
+            $espacio->nucleoTematico = $book->nucleotematico;
+            $espacio->justificacion = $book->justificacion;
+            $espacio->metodologia = $book->metodologia;
+            $espacio->evaluacion = $book->evaluacion;
+            $espacio->descripcion = $book->descripcion;
+            $espacio->competenciasPropias = $book->competenciasPropias;
+            $espacio->contenidoConceptual = $book->contenidoconceptual;
+            $espacio->contenidoProcedimental = $book->contenidoprocedimental;
+            $espacio->contenidoActitudinal = $book->contenidoactitudinal;
+            $espacio->procesosIntegrativos = $book->procesosintegrativos;
+            $espacio->unidades = $book->unidades;
+            $espacio->bibliografia = $book->bibliografia;
+            $espacio->recursosElectronicos = $book->recursosElectronicos;
+            $espacio->vigencia = $book->vigencia;
+            $espacio->historialRevision  = $book->historialRevision;
 
-            $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
-            fwrite($archivo, "El espacio academico ".$espacio->nombre. " fue importado correctamente\r\n");
-            fclose($archivo);
+            $espacio->semester_id = $book->semester_id;
+            $espacio->academicplan_id = $book->academicplan_id;
+            $espacio->activityacademic_id = $book->activityacademic_id;
+            $espacio->typeevaluation_id = $book->typeevaluation_id;
+            $espacio->typemethodology_id = $book->typemethodology_id;
+            $espacio->nature_id = $book->nature_id;
+            $espacio->knowledgearea_id = $book->knowledgearea_id;
             
-          }else
-            \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
+
+            if($espacio->save()){
+              $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
+              fwrite($archivo, "El espacio academico ".$espacio->nombre. " fue importado correctamente\r\n");
+              fclose($archivo);
+            }
+
+
+            $requisitos = explode(",",$book->requisitos);
+            $corequisitos = explode(",",$book->corequisitos);
+            
+              if(sizeof($requisitos) > 0){
+                for ($i=0; $i < sizeof($requisitos); $i++) {
+                    $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first()['id']; 
+                    if($codigo != ""){
+                      Requirement::create([
+                        'academicspaceD_id' => $espacio->id,
+                        'academicspace_id' => $codigo,
+                        'tipo' => 1
+                      ]);
+                    }
+                 }
+              }
+
+              if(sizeof($corequisitos) > 0){
+               for ($i=0; $i < sizeof($corequisitos); $i++) { 
+                    $codigo = Academicspace::where('codigo',$requisitos[$i])->select('id')->get()->first()['id']; 
+                    if($codigo != ""){
+                    Requirement::create([
+                      'academicspaceD_id' => $espacio->id,
+                      'academicspace_id' => $codigo,
+                      'tipo' => 2
+                    ]);
+                  }
+               }
+              }
+            }
           }
-      });
-      
-      \Alert::message('Espacios académicos importados exitosamente', 'success');
-      return redirect('/espaciosacademicos');
-      
-    }else{
-      \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
-      return redirect('/espaciosacademicos');
+        });
+        \Alert::message('Espacios académicos importados exitosamente', 'success');
+        return redirect('/espaciosacademicos');
+      }else
+      {
+        \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
+      }
     }
-  }
-  catch(Exception $e){
-    \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
-   
-   /* $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
-    fwrite($archivo, "===================== ERROR ===========================");
-    fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
-    fwrite($archivo, "=======================================================");
-    fclose($archivo);*/
-    return redirect('/espaciosacademicos');
-  }
+     catch(Exception $e){
+        \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/espaciosacademicos');
+    }
   }
   
 }
