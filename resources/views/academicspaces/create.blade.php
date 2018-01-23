@@ -223,16 +223,15 @@
 				</div>
 			</div>
     </div>
-</div>
 <div class="form-group" style="text-align:right">
 	<a href="{{url('/espaciosacademicos')}}">Regresar al listado de espacios académicos</a>
 	<input type="submit" value="Guardar" class="btn btn-success">
 </div>
     	{!! Form::close() !!}
+</div>
 @endsection
 @section("tabla")
-	<script> 
-	$(function() { $('textarea').froalaEditor() }); 
+	<script>  
 	$(".espacios").chosen({
 			placeholder_text_multiple: 'Seleccione los espacios académicos',
 			search_contains: true,

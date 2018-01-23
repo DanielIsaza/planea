@@ -221,20 +221,20 @@
 						'placeholder'=>'Responsables del syllabus']) }}
 				</div>
 			</div>
-		{!! Form::close() !!}
 	</div>
-</div>
 <div class="form-group" style="text-align:right">
 	<a href="{{url('/espaciosacademicos')}}">Regresar al listado de espacios académicos</a>
 	<input type="submit" value="Guardar" class="btn btn-success">
 </div>
+		{!! Form::close() !!}	
+</div>
 @endsection
 @section("tabla")
-	<script> $(function() { $('textarea').froalaEditor() }); 
+	<script>  
 		$(".espacios").chosen({
 				placeholder_text_multiple: 'Seleccione los espacios académicos',
 				search_contains: true,
-				no_results_text: 'No hay permisos con ese nombre'
+				no_results_text: 'No hay espacios académicos con ese nombre'
 		});
 	</script>
 @endsection	
