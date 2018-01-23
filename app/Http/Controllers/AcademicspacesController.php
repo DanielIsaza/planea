@@ -257,9 +257,11 @@ class AcademicspacesController extends Controller
    */
   public function import(){
     try{
-
+       $archivo = fopen("storage/importar_espacios_academicos_log.txt", "w");
+            fclose($archivo);
     if(!\Storage::disk('local')->exists('public/storage/espacios.xlsx')){
       Excel::load('public/storage/espacios.xlsx', function($reader) {
+       
         foreach ($reader->get() as $book) {
           $espacio = new Academicspace();
           $espacio->codigo = $book->codigo;
@@ -333,7 +335,7 @@ class AcademicspacesController extends Controller
       });
       
       \Alert::message('Espacios académicos importados exitosamente', 'success');
-      return response()->download("storage/importar_espacios_academicos_log.txt")->deleteFileAfterSend(true)->reload();
+      return redirect('/espaciosacademicos');
       
     }else{
       \Alert::message('El archivo espacios.xlsx no existe, importalo por favor', 'danger');
@@ -342,6 +344,12 @@ class AcademicspacesController extends Controller
   }
   catch(Exception $e){
     \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+   
+   /* $archivo = fopen("storage/importar_espacios_academicos_log.txt", "a");
+    fwrite($archivo, "===================== ERROR ===========================");
+    fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+    fwrite($archivo, "=======================================================");
+    fclose($archivo);*/
     return redirect('/espaciosacademicos');
   }
   }
