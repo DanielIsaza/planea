@@ -44,6 +44,7 @@ class ObjectivesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $objetivo = new Objective;
       $objetivo->nombre = $request->nombre;
       $objetivo->peso = $request->peso;
@@ -57,6 +58,16 @@ class ObjectivesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("objetives.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/objetivos');
+    }
   }
 
   /**
@@ -102,6 +113,7 @@ class ObjectivesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $objetivo = Objective::find($id);
       $objetivo->nombre = $request->nombre;
       $objetivo->peso = $request->peso;
@@ -115,6 +127,16 @@ class ObjectivesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("objetives.edit",["objetivo" => $objetivo]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/objetivos');
+    }
   }
   /**
    * Remove the specified resource from storage.
@@ -124,6 +146,7 @@ class ObjectivesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $objetvos = Objective::find($id)->objectivespace;
       if(count($objetvos) == 0){
           Objective::destroy($id);
@@ -133,5 +156,15 @@ class ObjectivesController extends Controller
           \Alert::message('No se puede eliminar el objetivo', 'danger');
           return redirect('/objetivos');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/objetivos');
+    }
   }
 }

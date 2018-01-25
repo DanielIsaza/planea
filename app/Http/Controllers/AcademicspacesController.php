@@ -59,6 +59,7 @@ class AcademicspacesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $espacio = new Academicspace;
       $espacio->codigo = $request->codigo;
       $espacio->nombre = $request->nombre;
@@ -113,6 +114,16 @@ class AcademicspacesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("academicspaces.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/espacios_academicos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/espaciosacademicos');
+    }
   }
 
   /**
@@ -175,6 +186,7 @@ class AcademicspacesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $espacio = Academicspace::find($id);
       $espacio->codigo = $request->codigo;
       $espacio->nombre = $request->nombre;
@@ -233,6 +245,16 @@ class AcademicspacesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("academicspaces.edit",["espacio" => $espacio]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/espacios_academicos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/espaciosacademicos');
+    }
   }
 
   /**
@@ -243,6 +265,7 @@ class AcademicspacesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       if(Academicspace::destroy($id)){
           
           \Alert::message('Espacio académico eliminado correctamente', 'success');
@@ -251,6 +274,16 @@ class AcademicspacesController extends Controller
           \Alert::message('Espacio académico eliminado correctamente', 'success');
           return redirect('/espaciosacademicos');
       }
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/espacios_academicos_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/espaciosacademicos');
+    }
   }
   /**
    * permite crear los espacios a partir de un archivo excel

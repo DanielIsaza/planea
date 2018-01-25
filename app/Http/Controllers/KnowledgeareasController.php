@@ -42,6 +42,7 @@ class KnowledgeareasController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $area = new Knowledgearea;
       $area->nombre = $request->nombre;
       $area->academicplan_id = $request->academicplan_id;
@@ -53,6 +54,16 @@ class KnowledgeareasController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("knowledgeareas.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/areas_conocimiento_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
   /**
@@ -97,6 +108,7 @@ class KnowledgeareasController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $area = Knowledgearea::find($id);
       $area->nombre = $request->nombre;
 
@@ -107,6 +119,16 @@ class KnowledgeareasController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("knowledgeareas.edit",["area" => $area]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/areas_conocimiento_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
   /**
@@ -117,6 +139,7 @@ class KnowledgeareasController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $espacio = Knowledgearea::find($id)->academicspace;
       if(count($espacio)==0){
           Knowledgearea::destroy($id);
@@ -126,6 +149,16 @@ class KnowledgeareasController extends Controller
           \Alert::message('No se puede eliminar el área de conocimiento', 'danger');
           return redirect('/areasconocimiento');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/areas_conocimiento_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
 }

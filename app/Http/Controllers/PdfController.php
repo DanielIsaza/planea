@@ -16,6 +16,7 @@ class PdfController extends Controller
  */
 
 public function descarga1($id){
+  try{
     $espacio = Academicspace::find($id);
 
     $templateword = new TemplateProcessor('storage/syllabus.docx');
@@ -82,9 +83,20 @@ public function descarga1($id){
     $templateword->setValue('requisitos',$requisitos);
     $templateword->saveAs("syllabus_".$espacio->nombre.".docx");
     return response()->download("syllabus_".$espacio->nombre.".docx")->deleteFileAfterSend(true);
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/espacios.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/espaciosacademicos');
+    }
 }
 
   public function formulario(){
+    try{
     $fp = fopen("storage/home.txt", "r");
         $linea = "";
         while(!feof($fp)) {
@@ -92,9 +104,20 @@ public function descarga1($id){
         }
     fclose($fp);
     return view("pdf.formulario",["contenido"=>$linea]);
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/formulario_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/');
+    }
   }
 
   public function subir(Request $request){
+    try{
     //obtenemos el campo file definido en el formulario
      $file = $request->file('file');
      //obtenemos el nombre del archivo
@@ -112,12 +135,23 @@ public function descarga1($id){
         }
      fclose($fp);
       return view("pdf.formulario",["contenido"=>$linea]);
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/subir_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/');
+    }
   }
   /**
   * Metodo que permite almacenar la informacion que sera mostrada en home
   *
   */
   public function home(Request $request){
+    try{
     $archivo = fopen("storage/home.txt", "w") or die("No se pudo abrir el archivo!");
 
     fwrite($archivo, $request->contenido);
@@ -125,5 +159,15 @@ public function descarga1($id){
 
     \Alert::message('Información actualizada correctamente', 'success');
     return redirect('/');
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/home_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/');
+    }
   }
 }

@@ -41,6 +41,7 @@ class AcademicprogramsController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $programa = new Academicprogram;
         $programa->nombre = $request->nombre;
         $programa->faculty_id = $request->faculty_id;
@@ -51,6 +52,16 @@ class AcademicprogramsController extends Controller
             \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
             return view("academicprograms.create");
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/programas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/programasacademicos');
+    }
     }
 
     /**
@@ -87,6 +98,7 @@ class AcademicprogramsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $programa = Academicprogram::find($id);
         $programa->nombre = $request->nombre;
         $programa->faculty_id = $request->faculty_id;
@@ -97,6 +109,16 @@ class AcademicprogramsController extends Controller
             \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
             return view("academicprograms.edit",["programa" => $programa]);
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/programas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/programasacademicos');
+    }
     }
 
     /**
@@ -107,6 +129,7 @@ class AcademicprogramsController extends Controller
      */
     public function destroy($id)
     {
+        try{
         $planes = Academicprogram::find($id)->academicplans;
         if(count($planes)==0){
             Academicprogram::destroy($id);
@@ -116,11 +139,22 @@ class AcademicprogramsController extends Controller
             \Alert::message('No se puede eliminar el programa académico', 'danger');
             return redirect('/programasacademicos');
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/programas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/programasacademicos');
+    }
     }
     /**
    * permite crear los programas a partir de un archivo excel
    */
   public function import(){
+    try{
     if(\Storage::disk('local')->exists('/public/programas.csv')){
       Excel::load('public/storage/programas.csv', function($reader) {
         foreach ($reader->get() as $book) {
@@ -136,6 +170,16 @@ class AcademicprogramsController extends Controller
     }else{
       \Alert::message('El archivo programas.csv no existe, importalo por favor', 'danger');
       return redirect('/programas');
+    }
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/programas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/programasacademicos');
     }
   }
 }

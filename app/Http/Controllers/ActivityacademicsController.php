@@ -37,6 +37,7 @@ class ActivityacademicsController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $actividad = new Activityacademic;
       $actividad->nombre = $request->nombre;
 
@@ -47,6 +48,16 @@ class ActivityacademicsController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("activityacademics.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/actividades_academicas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/actividadesacademicas');
+    }
   }
 
   /**
@@ -81,6 +92,7 @@ class ActivityacademicsController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $actividad = Activityacademic::find($id);
       $actividad->nombre = $request->nombre;
 
@@ -91,6 +103,16 @@ class ActivityacademicsController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("activityacademics.edit",["actividad" => $actividad]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/actividades_academicas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/actividadesacademicas');
+    }
   }
 
   /**
@@ -101,6 +123,7 @@ class ActivityacademicsController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $espacios = Activityacademic::find($id)->academicspace;
       if (count($espacios) == 0) {
           Activityacademic::destroy($id);
@@ -110,5 +133,15 @@ class ActivityacademicsController extends Controller
           \Alert::message('No se puede eliminar la actividad académica', 'danger');
           return redirect('/actividadesacademicas');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/actividades_academicas_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/actividadesacademicas');
+    }
   }
 }

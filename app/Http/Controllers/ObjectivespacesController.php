@@ -48,6 +48,7 @@ class ObjectivespacesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $espaciobjetivo = new Objectiveespace;
       $espaciobjetivo->academicspace_id = $request->academicspace_id;
       $espaciobjetivo->objective_id = $request->objective_id;
@@ -60,6 +61,16 @@ class ObjectivespacesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("objectivess.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_asignacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/asignacion');
+    }
   }
 
   /**
@@ -109,6 +120,7 @@ class ObjectivespacesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $objetivo = Objectiveespace::find($id);
       $peso = Weight::find($id);
       $peso->peso = $request->peso;
@@ -119,6 +131,16 @@ class ObjectivespacesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("objetivess.edit",["objetivo" => $objetivo]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_asignacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/asignacion');
+    }
   }
   /**
    * Remove the specified resource from storage.
@@ -128,6 +150,7 @@ class ObjectivespacesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $peso = Weight::where('Objectiveespace_id',$id);
       if($peso->delete() && Objectiveespace::destroy($id)){
           \Alert::message('Asignación eliminada correctamente', 'success');
@@ -136,6 +159,16 @@ class ObjectivespacesController extends Controller
           \Alert::message('No se puede eliminar la asignación', 'danger');
           return redirect('/asignacion');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/objetivos_asignacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/asignacion');
+    }
   }
 
 }

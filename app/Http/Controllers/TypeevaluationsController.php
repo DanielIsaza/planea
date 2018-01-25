@@ -37,6 +37,7 @@ class TypeevaluationsController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $tipoevaluacion = new Typeevaluation;
       $tipoevaluacion->nombre = $request->nombre;
 
@@ -47,6 +48,16 @@ class TypeevaluationsController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("typeevaluations.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_evaluacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposevaluaciones');
+    }
   }
 
   /**
@@ -81,6 +92,7 @@ class TypeevaluationsController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $tipoevaluacion = Typeevaluation::find($id);
       $tipoevaluacion->nombre = $request->nombre;
 
@@ -91,6 +103,16 @@ class TypeevaluationsController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("typeevaluations.edit",["tipoevaluacion" => $tipoevaluacion]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_evaluacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposevaluaciones');
+    }
   }
 
   /**
@@ -101,6 +123,7 @@ class TypeevaluationsController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $espacios = Typeevaluation::find($id)->academicspace;
       if(count($esacios) == 0){
           Typeevaluation::destroy($id);
@@ -110,5 +133,15 @@ class TypeevaluationsController extends Controller
           \Alert::message('No se puede eliminar el tipo de evaluación', 'danger');
           return redirect('/tiposevaluaciones');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_evaluacion_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposevaluaciones');
+    }
   }
 }

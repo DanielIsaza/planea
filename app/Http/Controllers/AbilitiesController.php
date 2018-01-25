@@ -45,6 +45,7 @@ class AbilitiesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $habilidad = new Ability;
       $habilidad->nombre = $request->nombre;
       $habilidad->peso = $request->peso;
@@ -57,6 +58,16 @@ class AbilitiesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("abilities.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/habilidades');
+    }
   }
 
   /**
@@ -101,6 +112,7 @@ class AbilitiesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $habilidad = Ability::find($id);
       $habilidad->nombre = $request->nombre;
       $habilidad->peso = $request->peso;
@@ -112,6 +124,16 @@ class AbilitiesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("abilities.edit",["habilidad" => $habilidad]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/habilidades');
+    }
   }
 
   /**
@@ -122,6 +144,7 @@ class AbilitiesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $objetivos = Ability::find($id)->objective;
       if(count($objectivos) == 0){
           Ability::destroy($id);
@@ -131,6 +154,15 @@ class AbilitiesController extends Controller
           \Alert::message('No se puede eliminar la habilidad', 'danger');
           return redirect('/habilidades');
       }
-
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/habilidades');
+    }
   }
 }

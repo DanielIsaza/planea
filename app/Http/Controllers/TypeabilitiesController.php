@@ -37,6 +37,7 @@ class TypeabilitiesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $tipoHabilidad = new Typeability;
       $tipoHabilidad->nombre = $request->nombre;
 
@@ -47,6 +48,16 @@ class TypeabilitiesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("typeabilities.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposhabilidad');
+    }
   }
 
   /**
@@ -81,6 +92,7 @@ class TypeabilitiesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $tiposhabilidad = Typeability::find($id);
       $tiposhabilidad->nombre = $request->nombre;
 
@@ -91,6 +103,16 @@ class TypeabilitiesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("typeabilities.edit",["tiposhabilidad"=>$tiposhabilidad]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposhabilidad');
+    }
   }
 
   /**
@@ -101,6 +123,7 @@ class TypeabilitiesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $habilidad = Typeability::find($id)->abilities;
       if(count($habilidad) == 0){
           Typeability::destroy($id);
@@ -110,6 +133,16 @@ class TypeabilitiesController extends Controller
           \Alert::message('El tipo de habilidad no se puede eliminar', 'danger');
           return redirect('/tiposhabilidad');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/tipo_habilidades_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/tiposhabilidad');
+    }
   }
 
 }

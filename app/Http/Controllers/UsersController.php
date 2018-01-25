@@ -44,6 +44,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $usuario = User::create([
             'name' => $request->nombre,
             'email' => $request->correo,
@@ -66,6 +67,16 @@ class UsersController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("auth.create");
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/usuario_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/usuarios');
+    }
     }
 
     /**
@@ -107,6 +118,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $usuario = User::find($id);
         $usuario->name = $request->nombre;
         $usuario->email = $request->correo;
@@ -134,6 +146,16 @@ class UsersController extends Controller
             \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("auth.edit");
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/usuario_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/usuarios');
+    }
     }
 
     /**
@@ -144,6 +166,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        try{
         if( User::destroy($id)){
             \Alert::message('Usuario eliminado correctamente', 'success');
           return redirect("/usuarios");
@@ -151,5 +174,15 @@ class UsersController extends Controller
             \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("/usuarios");
         }
+        }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/usuario_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/usuarios');
+    }
     }
 }

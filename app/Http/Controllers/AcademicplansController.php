@@ -43,6 +43,7 @@ class AcademicplansController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $plan = new Academicplan;
       $plan->nombre = $request->nombre;
       $plan->academicprogram_id = $request->academicprogram_id;
@@ -55,6 +56,16 @@ class AcademicplansController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("academicplans.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/planes_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/planesacademicos');
+    }
   }
 
   /**
@@ -97,6 +108,7 @@ class AcademicplansController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $plan = Academicplan::find($id);
       $plan->nombre = $request->nombre;
       $plan->academicprogram_id = $request->academicprogram_id;
@@ -110,6 +122,16 @@ class AcademicplansController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("academicplans.edit",["plan" => $plan]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/planes_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/planesacademicos');
+    }
   }
 
   /**
@@ -120,6 +142,7 @@ class AcademicplansController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $habilidades = Academicplan::find($id)->abilities;
       if(count($habilidades) == 0){
           Academicplan::destroy($id);
@@ -129,11 +152,22 @@ class AcademicplansController extends Controller
           \Alert::message('No sé puede eliminar el plan académico', 'danger');
           return redirect('/planesacademicos');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/planes_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/planesacademicos');
+    }
   }
    /**
    * permite crear los planes a partir de un archivo excel
    */
   public function import(){
+    try{
     if(\Storage::disk('local')->exists('/public/planes.csv')){
       Excel::load('public/storage/planes.csv', function($reader) {
         foreach ($reader->get() as $book) {
@@ -151,6 +185,16 @@ class AcademicplansController extends Controller
     }else{
       \Alert::message('El archivo planes.csv no existe, importalo por favor', 'danger');
       return redirect('/planesacademicos');
+    }
+    }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log de materias', 'danger');
+       
+        $archivo = fopen("storage/planes_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/planesacademicos');
     }
   }
 }
