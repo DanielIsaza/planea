@@ -1,8 +1,11 @@
-El espacio academico COMUNICACIÓN ORAL Y ESCRITA fue importado correctamente
-El espacio academico FUNDAMENTOS DE CIDBA fue importado correctamente
-El espacio academico METODOLOGÍA Y ESTRATEGIAS DEL APRENDIZAJE VIRTUAL fue importado correctamente
-El espacio academico LINGÜISTICA GENERAL fue importado correctamente
-El espacio academico LÓGICA MATEMÁTICA fue importado correctamente
-El espacio academico REDACCIÓN fue importado correctamente
-El espacio academico TEORÍA ARCHIVÍSTICA fue importado correctamente
-El espacio academico ANIMACIÓN A LA LECTURA fue importado correctamente
+El espacio academico DESCRIPCIÓN BIBLIOGRÁFICA
+NORMALIZADA fue importado correctamente
+El espacio academico LENGUAJES, ANÁLISIS Y RECUPERACIÓN
+DE LA INFORMACIÓN fue importado correctamente
+El espacio academico CLUBES Y RINCONES DE LECTURA fue importado correctamente
+El espacio academico DOCUMENTOS DIGITALES fue importado correctamente
+El espacio academico ANÁLISIS Y DISEÑO DE SISTEMAS DE
+INFORMACIÓN I fue importado correctamente
+El espacio academico APLICACIONES ESPECIALIZADAS PARA
+CIDBA fue importado correctamente
+El espacio academico LECTORES AUTÓNOMOS fue importado correctamente

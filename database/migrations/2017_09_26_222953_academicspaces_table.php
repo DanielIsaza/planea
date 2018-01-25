@@ -40,9 +40,9 @@ class AcademicspacesTable extends Migration
         $table->text('unidades')->nullable();
         $table->text('bibliografia')->nullable();
         $table->text('recursosElectronicos')->nullable();
-        $table->string('historialRevision',50)->default('por diligenciar')->nullable();
-        $table->string('vigencia',30)->default('por diligenciar')->nullable();
-        $table->string('responsables',30)->default('por diligenciar')->nullable();
+        $table->text('historialRevision')->nullable();
+        $table->text('vigencia')->nullable();
+        $table->text('responsables')->nullable();
 
         $table->integer('semester_id')->unsigned()->default(1)->nullable();
         $table->integer('academicplan_id')->unsigned()->default(1)->nullable();

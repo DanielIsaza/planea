@@ -38,9 +38,22 @@ public function descarga1($id){
     $templateword->setValue('horasPracticas',$espacio->horasPracticas);
     $templateword->setValue('horasTeoPract',$espacio->horasTeoPract);
     $templateword->setValue('horasAsesorias',$espacio->horasAsesorias);
-    $templateword->setValue('habilitable',$espacio->habilitable);
-    $templateword->setValue('validable',$espacio->validable);
-    $templateword->setValue('homologable',$espacio->homologable);
+    if($espacio->habilitable == 1){
+      $templateword->setValue('habilitable','Si');
+    }else {
+      $templateword->setValue('habilitable','No');
+    }
+    if($espacio->validable == 1){
+      $templateword->setValue('validable','Si');
+    }else{
+      $templateword->setValue('validable','No');
+    }
+    if($espacio->homologable == 1){
+      $templateword->setValue('homologable','Si');
+    }else{
+      $templateword->setValue('homologable','No');
+    }
+
     $templateword->setValue('procesosIntegrativos',$espacio->procesosIntegrativos);
     $templateword->setValue('contenidoConceptual',$espacio->contenidoConceptual);
     $templateword->setValue('contenidoProcedimental',$espacio->contenidoProcedimental);
@@ -65,9 +78,8 @@ public function descarga1($id){
     for ($i=0; $i < sizeof($espacio->requirement); $i++) { 
       $requisitos = $requisitos." ".Academicspace::find($espacio->requirement[$i]->academicspace_id)->nombre;
     }
-    //$templateword->setValue('requisitos',$requisitos);
-
-
+    
+    $templateword->setValue('requisitos',$requisitos);
     $templateword->saveAs("syllabus_".$espacio->nombre.".docx");
     return response()->download("syllabus_".$espacio->nombre.".docx")->deleteFileAfterSend(true);
 }
