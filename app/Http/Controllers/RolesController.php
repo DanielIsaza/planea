@@ -50,6 +50,7 @@ class RolesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $rol = Role::create([
         'name' => $request->nombre,
         'slug' => $request->nombre,
@@ -67,6 +68,16 @@ class RolesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("roles.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/roles_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/roles');
+    }
   }
 
   /**
@@ -107,6 +118,7 @@ class RolesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $rol = Role::find($id);
       $rol->name = $request->nombre;
       $rol->description = $request->descripcion;
@@ -123,6 +135,16 @@ class RolesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("roles.edit",["rol" => $rol]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/roles_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/roles');
+    }
   }
 
   /**
@@ -133,13 +155,24 @@ class RolesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       if(Role::destroy($id)){
         \Alert::message('Rol eliminado correctamente', 'success');
         return redirect('/roles');
       }else{
         \Alert::message('El rol no pudo ser eliminado', 'danger');
           return redirect('/roles');
-      }     
+      }   
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/roles_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/roles');
+    }  
   }
 
 }

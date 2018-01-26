@@ -23,6 +23,9 @@
 </div>
 <div  style="float:top; text-align:right;">
 	@permission('facultades.create')
+	<a href="{{url('/descargalogfacultades')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/importarFacultades')}}" class="btn btn-success btn-fab">
 		Cargar desde archivo
 	</a>

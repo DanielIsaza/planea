@@ -42,6 +42,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('tipohabilidad.create')
+	<a href="{{url('/descargalogtipohabilidades')}}" class="btn btn-success btn-fab">
+         Descarga log
+     </a>
 	<a href="{{url('/tiposhabilidad/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>

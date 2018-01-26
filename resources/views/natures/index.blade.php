@@ -40,6 +40,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('naturalezas.create')
+	<a href="{{url('/descargalognaturalezas')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/naturaleza/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>

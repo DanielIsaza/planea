@@ -199,6 +199,62 @@ Route::group(['middleware' => 'auth'],function()
 	Route::get('descargalogespacios',[function(){
 		return response()->download("storage/importar_espacios_academicos_log.txt");
 	}]);
+	//Ruta que permite descargar el log de las habilidades
+	Route::get('descargaloghabilidades',[function(){
+		return response()->download("storage/habilidades_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los planes
+	Route::get('descargalogplanes',[function(){
+		return response()->download("storage/planes_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los programas
+	Route::get('descargalogprogramas',[function(){
+		return response()->download("storage/programas_log.txt");
+	}]);
+	//Ruta que permite descargar el log de las actividades académicas
+	Route::get('descargalogactividades',[function(){
+		return response()->download("storage/actividades_academicas_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los programas
+	Route::get('descargalogfacultades',[function(){
+		return response()->download("storage/facultades_log.txt");
+	}]);
+	//Ruta que permite descargar el log de las áreas de conocimiento
+	Route::get('descargalogareas',[function(){
+		return response()->download("storage/areas_conocimiento_log.txt");
+	}]);
+	//Ruta que permite descargar el log de las naturalezass
+	Route::get('descargalognaturalezas',[function(){
+		return response()->download("storage/naturaleza_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los objetivos
+	Route::get('descargalogobjetivos',[function(){
+		return response()->download("storage/objetivos_log.txt");
+	}]);
+	//Ruta que permite descargar el log de las asignaciones
+	Route::get('descargalogasignacion',[function(){
+		return response()->download("storage/objetivos_asignacion_log.txt");
+	}]);
+	//Ruta que permite descargar el log de la descarga de syllabus
+	Route::get('descargalogdescarga',[function(){
+		return response()->download("storage/descarga_log.txt");
+	}]);
+	//Ruta que permite descargar el log del formulario
+	Route::get('descargalogformulario',[function(){
+		return response()->download("storage/formulario_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los roles
+	Route::get('descargalogroles',[function(){
+		return response()->download("storage/roles_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los roles
+	Route::get('descargalogtipohabilidades',[function(){
+		return response()->download("storage/tipo_habilidades_log.txt");
+	}]);
+	//Ruta que permite descargar el log de los tipo de evaluacion
+	Route::get('descargalogtipoevaluacion',[function(){
+		return response()->download("storage/tipo_evaluacion_log.txt");
+	}]);
 	//
 	Route::get('prueba',[function(){
 		//$ac = array(App\knowledgearea::all());

@@ -31,6 +31,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('planes.create')
+	<a href="{{url('/descargalogplanes')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/importarPlanes')}}" class="btn btn-success btn-fab">
 		Cargar desde archivo
 	</a>

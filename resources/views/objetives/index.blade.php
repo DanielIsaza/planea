@@ -34,6 +34,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('objetivos.create')
+	<a href="{{url('/descargalogobjetivos')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/objetivos/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>

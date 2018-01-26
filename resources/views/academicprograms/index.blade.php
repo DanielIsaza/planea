@@ -23,6 +23,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('programas.create')
+	<a href="{{url('/descargalogprogramas')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/importarProgramas')}}" class="btn btn-success btn-fab">
 		Cargar desde archivo
 	</a>

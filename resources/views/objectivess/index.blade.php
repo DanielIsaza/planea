@@ -37,6 +37,9 @@
 </div>
 <div style="float:top; text-align:right;">
 	@permission('asignarpesos.create')
+	<a href="{{url('/descargalogasignacion')}}" class="btn btn-success btn-fab">
+		Descarga log
+	</a>
 	<a href="{{url('/asignacion/create')}}" class="btn btn-primary btn-fab">
 		<i class="glyphicon glyphicon-plus"></i>
 	</a>

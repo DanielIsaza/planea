@@ -37,6 +37,7 @@ class NaturesController extends Controller
    */
   public function store(Request $request)
   {
+    try{
       $nature = new Nature;
       $nature->nombre = $request->nombre;
 
@@ -47,6 +48,16 @@ class NaturesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("natures.create");
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/naturaleza_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
   /**
@@ -81,6 +92,7 @@ class NaturesController extends Controller
    */
   public function update(Request $request, $id)
   {
+    try{
       $nature = Nature::find($id);
       $nature->nombre = $request->nombre;
 
@@ -91,6 +103,16 @@ class NaturesController extends Controller
           \Alert::message('Ocurrio un error, intente nuevamente', 'danger');
           return view("natures.edit",["nature" => $nature]);
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/naturaleza_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
   /**
@@ -101,6 +123,7 @@ class NaturesController extends Controller
    */
   public function destroy($id)
   {
+    try{
       $espacio = Nature::find($id)->academicspace;
       if(count($espacio) == 0){
           Nature::destroy($id);
@@ -110,6 +133,16 @@ class NaturesController extends Controller
           \Alert::message('No se puede eliminar la naturaleza', 'danger');
           return redirect('/naturaleza');
       }
+      }catch(Exception $e){
+      \Alert::message('ocurrio un error, por favor revise el log', 'danger');
+       
+        $archivo = fopen("storage/naturaleza_log.txt", "a");
+        fwrite($archivo, "===================== ERROR ===========================");
+        fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
+        fwrite($archivo, "=======================================================");
+        fclose($archivo);
+        return redirect('/areasconocimiento');
+    }
   }
 
 }

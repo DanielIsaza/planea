@@ -18,6 +18,9 @@
                <button type="submit" class="btn btn-success">Subir</button>
           </div>
         </div>
+        <a href="{{url('/descargalogformulario')}}" class="btn btn-success btn-fab">
+         Descarga log
+        </a>
       {!! Form::close() !!}
       @endpermission
     </div>

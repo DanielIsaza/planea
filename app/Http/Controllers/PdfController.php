@@ -86,7 +86,7 @@ public function descarga1($id){
     }catch(Exception $e){
       \Alert::message('ocurrio un error, por favor revise el log', 'danger');
        
-        $archivo = fopen("storage/espacios.txt", "a");
+        $archivo = fopen("storage/descarga_log.txt", "a");
         fwrite($archivo, "===================== ERROR ===========================");
         fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
         fwrite($archivo, "=======================================================");
@@ -138,7 +138,7 @@ public function descarga1($id){
       }catch(Exception $e){
       \Alert::message('ocurrio un error, por favor revise el log', 'danger');
        
-        $archivo = fopen("storage/subir_log.txt", "a");
+        $archivo = fopen("storage/formulario_log.txt", "a");
         fwrite($archivo, "===================== ERROR ===========================");
         fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
         fwrite($archivo, "=======================================================");
@@ -162,7 +162,7 @@ public function descarga1($id){
     }catch(Exception $e){
       \Alert::message('ocurrio un error, por favor revise el log', 'danger');
        
-        $archivo = fopen("storage/home_log.txt", "a");
+        $archivo = fopen("storage/formulario_log.txt", "a");
         fwrite($archivo, "===================== ERROR ===========================");
         fwrite($archivo, "\r\n". $e->getMessage()."\r\n");
         fwrite($archivo, "=======================================================");
